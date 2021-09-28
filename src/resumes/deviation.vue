@@ -78,14 +78,14 @@ export default Vue.component(name, getVueOptions(name));
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-@text-purple: #680568;
+@flavor-color: blue;
+
 #template {
     box-sizing:border-box;
     font-family:'Barlow', sans-serif;
     h1, h2 {
         /*font-family:'Open Sans Condensed', sans-serif;*/
         margin:0;
-        color: @text-purple;
     }
 
     p {
@@ -94,7 +94,6 @@ export default Vue.component(name, getVueOptions(name));
     }
 
     ul li {
-        color:@text-purple;
         font-size:12px;
     }
 
@@ -169,7 +168,7 @@ export default Vue.component(name, getVueOptions(name));
         div.section-separator {
             overflow: hidden;
             white-space: nowrap;
-            color: blue;
+            color: @flavor-color;
             font-weight: 500;
             font-size: 16px;
 
@@ -181,7 +180,7 @@ export default Vue.component(name, getVueOptions(name));
                 margin-left: 0.8em;
                 border: none;
                 border-bottom: 1pt solid;
-                color: blue;
+                color: @flavor-color;
             }
         }
 
@@ -204,13 +203,11 @@ export default Vue.component(name, getVueOptions(name));
 
         .job-title, .degree {
             font-weight:700;
-            color: @text-purple;
             font-size:16px;
         }
 
         .experience-timeperiod, .education-timeperiod {
             font-weight:100;
-            color: @text-purple;
             font-size:16px;
         }
 
