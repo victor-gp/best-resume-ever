@@ -164,7 +164,7 @@ export default Vue.component(name, getVueOptions(name));
     }
 
     #resume-body {
-        padding: 40px 100px;
+        padding: 10px 80px;
 
         div.section-separator {
             overflow: hidden;
@@ -185,15 +185,10 @@ export default Vue.component(name, getVueOptions(name));
             }
         }
 
-        #experience-title, #education-title, #skills-title {
-            font-size:26px;
-            // text-transform:uppercase;
-        }
-
         .experience {
-            margin: 10px 0 10px 50px;
+            margin: 10px 0 10px;
             ul {
-                margin: 5px 0 0 0;
+                margin-top: 5px;
             }
         }
 
@@ -220,7 +215,7 @@ export default Vue.component(name, getVueOptions(name));
         }
 
         .education {
-            margin: 10px 0 10px 50px;
+            margin: 10px 0 10px;
         }
 
         #skill-list {
@@ -248,13 +243,6 @@ export default Vue.component(name, getVueOptions(name));
             color:white;
         }
     }
-
-}
-
-.spacer {
-    width:100%;
-    border-bottom:1px solid @text-purple;
-    margin:5px 0 10px;
 
 }
 </style>
