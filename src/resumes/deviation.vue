@@ -22,9 +22,7 @@
     </div>
     <div id="resume-body">
         <div id="experience-container">
-            <h2 id="experience-title">{{ lang.experience }}</h2>
-            <div class="spacer"></div>
-            <div style='overflow:hidden; white-space:nowrap; color:blue; font-weight:500; font-size:16px'>Work Experience<hr style='display:inline-block; width:100%;position: relative; top: 0.55ex; margin-left:0.8em;color:blue;border:none;border-bottom: 1pt solid;' /></div>
+            <div class="section-separator">{{ lang.experience }}<hr/></div>
             <div class="experience" v-for="experience in person.experience" :key="experience.company">
                 <h2 class="company">{{experience.company}}</h2>
                 <p class="job-info"><span class="job-title">{{experience.position}} | </span><span class="experience-timeperiod">{{experience.timeperiod}}</span></p>
@@ -39,16 +37,14 @@
             </div>
         </div>
         <div id="education-container">
-            <h2 id="education-title">{{ lang.education }}</h2>
-            <div class="spacer"></div>
+            <div class="section-separator">{{ lang.education }}<hr/></div>
             <div class="education" v-for="education in person.education" :key="education.degree">
                 <h2 class="education-description">{{education.description}}</h2>
                 <p><span class="degree">{{education.degree}} | </span><span class="education-timeperiod">{{education.timeperiod}}</span></p>
             </div>
         </div>
         <div id="skills-container" v-if="person.skills != []">
-            <h2 id="skills-title">{{ lang.skills }}</h2>
-            <div class="spacer"></div>
+            <div class="section-separator">{{ lang.skills }}<hr/></div>
             <p id="skill-description">{{person.knowledge}}</p>
             <ul id="skill-list">
                 <li class="skill" v-for="skill in person.skills" :key="skill.name">
@@ -169,6 +165,25 @@ export default Vue.component(name, getVueOptions(name));
 
     #resume-body {
         padding: 40px 100px;
+
+        div.section-separator {
+            overflow: hidden;
+            white-space: nowrap;
+            color: blue;
+            font-weight: 500;
+            font-size: 16px;
+
+            hr {
+                display: inline-block;
+                width: 100%;
+                position: relative;
+                top: 0.55ex;
+                margin-left: 0.8em;
+                border: none;
+                border-bottom: 1pt solid;
+                color: blue;
+            }
+        }
 
         #experience-title, #education-title, #skills-title {
             font-size:26px;
