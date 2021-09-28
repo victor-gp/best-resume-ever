@@ -22,6 +22,7 @@
         <div id="experience-container">
             <h2 id="experience-title">{{ lang.experience }}</h2>
             <div class="spacer"></div>
+            <div style='overflow:hidden; white-space:nowrap; color:blue; font-weight:500; font-size:16px'>Work Experience<hr style='display:inline-block; width:100%;position: relative; top: 0.55ex; margin-left:0.8em;color:blue;border:none;border-bottom: 1pt solid;' /></div>
             <div class="experience" v-for="experience in person.experience" :key="experience.company">
                 <h2 class="company">{{experience.company}}</h2>
                 <p class="job-info"><span class="job-title">{{experience.position}} | </span><span class="experience-timeperiod">{{experience.timeperiod}}</span></p>
@@ -73,12 +74,16 @@ const name = 'standard';
 export default Vue.component(name, getVueOptions(name));
 </script>
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&display=swap');
+</style>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 @text-purple: #680568;
 #template {
     box-sizing:border-box;
-    font-family:'Open Sans', sans-serif;
+    font-family:'Barlow', sans-serif;
     h1, h2 {
         /*font-family:'Open Sans Condensed', sans-serif;*/
         margin:0;
@@ -165,7 +170,7 @@ export default Vue.component(name, getVueOptions(name));
 
         #experience-title, #education-title, #skills-title {
             font-size:26px;
-            text-transform:uppercase;
+            // text-transform:uppercase;
         }
 
         .experience {
