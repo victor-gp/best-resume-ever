@@ -3,21 +3,26 @@
 <template>
 <div class="resume" id="template">
     <div id="resume-header">
-        <div id="header-left">
-            <h2 id="position">{{person.position}}</h2>
-            <h1 id="name">{{person.name.first + ' ' + person.name.last}}</h1>
-            <div id="info-flex">
-                <span id="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{person.contact.city}}</span>
-                <span id="email"><a :href='"mailto:" + person.contact.email'>
-                  <i class="fa fa-envelope-o" aria-hidden="true"></i> {{person.contact.email}}</a></span>
-                <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i> {{person.contact.phone}}</span>
-                <span v-if="person.contact.website" id="website"><a :href='person.contact.website'><i class="fa fa-home" aria-hidden="true"></i> {{person.contact.website}}</a></span>
-                <span v-if="person.contact.github" id="github"><a :href='contactLinks.github'><i class="fa fa-github" aria-hidden="true"></i> {{person.contact.github}}</a></span>
-                <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin'><i class="fa fa-linkedin-square" aria-hidden="true"></i> {{person.contact.linkedin}}</a></span>
+        <div id="header-container">
+            <div id="header-left">
+                <h2 id="position">{{person.position}}</h2>
+                <h1 id="name">{{person.name.first + ' ' + person.name.last}}</h1>
+            </div>
+            <div id="header-right">
+                <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
             </div>
         </div>
-        <div id="header-right">
-            <div id="headshot"></div>
+        <div id="contact-info">
+            <span v-if="person.contact.city" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i>{{person.contact.city}}</span>
+            <span id="email"><a :href='"mailto:" + person.contact.email'>
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>{{person.contact.email}}</a></span>
+            <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
+            <span v-if="person.contact.website" id="website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-home" aria-hidden="true"></i>{{person.contact.website}}</a></span>
+            <span v-if="person.contact.github" id="github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-github" aria-hidden="true"></i>{{person.contact.github}}</a></span>
+            <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{person.contact.linkedin}}</a></span>
         </div>
         <div v-if="person.about" id="about">
             <p>{{person.about}}</p>
@@ -75,7 +80,7 @@ export default Vue.component(name, getVueOptions(name));
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-@flavor-color: blue;
+@flavor-color: #2a3ffb;
 
 #template {
     box-sizing:border-box;
@@ -94,68 +99,68 @@ export default Vue.component(name, getVueOptions(name));
         font-size:12px;
     }
 
-    a {
-        color: black;
-        text-decoration:none;
-    }
-
-    .list-item-black {
-        color:black;
-    }
-
     #resume-header {
-        margin: 30px 30px 8px;
+        margin: 55px 80px 8px;
+
+        #header-container {
+            display: flex;
+        }
 
         #header-left {
-            /*width: 465px;*/
-            width:100%;
-            float: left;
             h1 {
-                font-size:49px;
-                // text-transform:uppercase;
+                font-size:42px;
                 line-height:56px;
+                /* todo: the disconnect b/w this & font-size looks good, but it breaks bottom-alignment with the photo,
+                makes that look too close to contact-info. I should reproduce it with margins + padding */
             }
             h2 {
                 font-size:22px;
             }
-            #info-flex {
-                display:flex;
-                margin-top:8px;
-                font-size:14px;
+        }
+        #header-right {
+            position: relative;
+            // takes the leftover horizontal space so that #headshot can be right aligned
+            flex-grow: 1;
 
-                span {
-                    margin-right:25px;
-                }
-                i {
-                    margin-right:5px;
-                }
-                .fa-github {
-                    font-size: 115%
-                }
+            #headshot {
+                // along with the parent's relative pos, makes this.height relative to #header-left. somehow XD
+                position: absolute;
+                max-height: 100%;
+                object-fit: scale-down;
+                right: 0px;
+                border-radius: 50%;
+                // padding-bottom: 10px; // looks eggy but cool!
             }
         }
+        #contact-info {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: @flavor-color; // todo: give this some thought
 
-        /*#header-right {
-            width: 125px;
-            float: right;
-            margin: 0px;
-            box-sizing: border-box;
-            height: 140px;
-            background-color: #FFF;
-            padding: 5px;
-            #headshot {
-                width: 100%;
-                height: 100%;
-                background:url('../../resume/id.jpg');
-                background-position:center;
-                background-size:cover;
+            span {
+                //margin-right: 20px;
             }
-        }*/
-
+            i {
+                margin-right: 0.5em;
+            }
+            a {
+                text-decoration: none; // no underline for links
+                color: inherit; // don't change color on :visited
+            }
+            .fa-github {
+                color: black;
+                font-size: 115% // coz it's too small, can't make out the octocat!
+            }
+            .fa-linkedin-square {
+                color: #0077b5; // linkedin blue
+            }
+        }
         #about {
-            padding-top: 20px; // fixme: this hack
-            margin: 20px 50px;  // on the sides: 50 + 30 (from #header) = 80 (same as #body)
             clear: both;
+            margin-top: 16px;
+            margin-bottom: 30px;
             p {
                 font-size: 14px;
             }
