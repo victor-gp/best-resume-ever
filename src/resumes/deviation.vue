@@ -1,32 +1,30 @@
 // based on some of the templates in <https://standardresume.co/>
 
 <template>
-<div class="resume" id="template">
-    <div id="resume-header">
-        <div id="header-container">
-            <div id="header-left">
-                <h2 id="position">{{person.position}}</h2>
-                <h1 id="name">{{person.name.first + ' ' + person.name.last}}</h1>
-            </div>
-            <div id="header-right">
-                <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
-            </div>
+<div class="resume" id="template"><div id="page-container">
+    <div id="header-container">
+        <div id="header-left">
+            <h2 id="position">{{person.position}}</h2>
+            <h1 id="name">{{person.name.first + ' ' + person.name.last}}</h1>
         </div>
-        <div id="contact-info">
-            <span v-if="person.contact.city" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i>{{person.contact.city}}</span>
-            <span id="email"><a :href='"mailto:" + person.contact.email'>
-                <i class="fa fa-envelope-o" aria-hidden="true"></i>{{person.contact.email}}</a></span>
-            <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
-            <span v-if="person.contact.website" id="website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-home" aria-hidden="true"></i>{{person.contact.website}}</a></span>
-            <span v-if="person.contact.github" id="github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-github" aria-hidden="true"></i>{{person.contact.github}}</a></span>
-            <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{person.contact.linkedin}}</a></span>
+        <div id="header-right">
+            <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
         </div>
-        <div v-if="person.about" id="about">
-            <p>{{person.about}}</p>
-        </div>
+    </div>
+    <div id="contact-info">
+        <span v-if="person.contact.city" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i>{{person.contact.city}}</span>
+        <span id="email"><a :href='"mailto:" + person.contact.email'>
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>{{person.contact.email}}</a></span>
+        <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
+        <span v-if="person.contact.website" id="website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-home" aria-hidden="true"></i>{{person.contact.website}}</a></span>
+        <span v-if="person.contact.github" id="github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-github" aria-hidden="true"></i>{{person.contact.github}}</a></span>
+        <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{person.contact.linkedin}}</a></span>
+    </div>
+    <div v-if="person.about" id="about">
+        <p>{{person.about}}</p>
     </div>
     <div id="resume-body">
         <div id="experience-container">
@@ -63,7 +61,7 @@
             </ul>
         </div>
     </div>
-</div>
+</div></div>
 </template>
 
 <script>
@@ -82,9 +80,11 @@ export default Vue.component(name, getVueOptions(name));
 <style lang="less" scoped>
 @flavor-color: #2a3ffb;
 
-#template {
+#page-container {
     box-sizing:border-box;
+    margin: 55px 80px 8px; // cannot set border-box & margins in #template
     font-family:'Barlow', sans-serif;
+
     h1, h2 {
         /*font-family:'Open Sans Condensed', sans-serif;*/
         margin:0;
@@ -98,139 +98,137 @@ export default Vue.component(name, getVueOptions(name));
     ul li {
         font-size:12px;
     }
+}
 
-    #resume-header {
-        margin: 55px 80px 8px;
+#header-container {
+    display: flex;
+}
+#header-left {
+    h1 {
+        font-size:42px;
+        line-height:56px;
+        /* todo: the disconnect b/w this & font-size looks good, but it breaks bottom-alignment with the photo,
+        makes that look too close to contact-info. I should reproduce it with margins + padding */
+    }
+    h2 {
+        font-size:22px;
+    }
+}
+#header-right {
+    position: relative;
+    // takes the leftover horizontal space so that #headshot can be right aligned
+    flex-grow: 1;
 
-        #header-container {
-            display: flex;
-        }
+    #headshot {
+        // along with the parent's relative pos, makes this.height relative to #header-left. somehow XD
+        position: absolute;
+        max-height: 100%;
+        object-fit: scale-down;
+        right: 0px;
+        border-radius: 50%;
+        // padding-bottom: 10px; // looks eggy but cool!
+    }
+}
 
-        #header-left {
-            h1 {
-                font-size:42px;
-                line-height:56px;
-                /* todo: the disconnect b/w this & font-size looks good, but it breaks bottom-alignment with the photo,
-                makes that look too close to contact-info. I should reproduce it with margins + padding */
-            }
-            h2 {
-                font-size:22px;
-            }
-        }
-        #header-right {
+#contact-info {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between; // takes the full width of the document
+
+    font-size: 13px;
+    color: @flavor-color; // todo: give this some thought
+
+    span {
+        //margin-right: 20px;
+    }
+    i {
+        margin-right: 0.5em;
+    }
+    a {
+        text-decoration: none; // no underline for links
+        color: inherit; // don't change color on :visited
+    }
+    .fa-github {
+        color: black;
+        font-size: 115% // coz it's too small, can't make out the octocat!
+    }
+    .fa-linkedin-square {
+        color: #0077b5; // linkedin blue
+    }
+}
+
+#about {
+    clear: both;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    p {
+        font-size: 14px;
+    }
+}
+
+#resume-body {
+    margin: 10px 0;
+
+    div.section-separator {
+        overflow: hidden;
+        white-space: nowrap;
+        color: @flavor-color;
+        font-weight: 500;
+        font-size: 16px;
+
+        hr {
+            display: inline-block;
+            width: 100%;
             position: relative;
-            // takes the leftover horizontal space so that #headshot can be right aligned
-            flex-grow: 1;
-
-            #headshot {
-                // along with the parent's relative pos, makes this.height relative to #header-left. somehow XD
-                position: absolute;
-                max-height: 100%;
-                object-fit: scale-down;
-                right: 0px;
-                border-radius: 50%;
-                // padding-bottom: 10px; // looks eggy but cool!
-            }
-        }
-        #contact-info {
-            margin-top: 8px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: @flavor-color; // todo: give this some thought
-
-            span {
-                //margin-right: 20px;
-            }
-            i {
-                margin-right: 0.5em;
-            }
-            a {
-                text-decoration: none; // no underline for links
-                color: inherit; // don't change color on :visited
-            }
-            .fa-github {
-                color: black;
-                font-size: 115% // coz it's too small, can't make out the octocat!
-            }
-            .fa-linkedin-square {
-                color: #0077b5; // linkedin blue
-            }
-        }
-        #about {
-            clear: both;
-            margin-top: 16px;
-            margin-bottom: 30px;
-            p {
-                font-size: 14px;
-            }
+            top: 0.55ex;
+            margin-left: 0.8em;
+            border: none;
+            border-bottom: 1pt solid;
+            color: @flavor-color;
         }
     }
 
-    #resume-body {
-        margin: 10px 80px;
-
-        div.section-separator {
-            overflow: hidden;
-            white-space: nowrap;
-            color: @flavor-color;
-            font-weight: 500;
-            font-size: 16px;
-
-            hr {
-                display: inline-block;
-                width: 100%;
-                position: relative;
-                top: 0.55ex;
-                margin-left: 0.8em;
-                border: none;
-                border-bottom: 1pt solid;
-                color: @flavor-color;
-            }
+    .experience {
+        margin: 10px 0 10px;
+        ul {
+            margin-top: 5px;
         }
+    }
 
-        .experience {
-            margin: 10px 0 10px;
-            ul {
-                margin-top: 5px;
-            }
+    .company, .education-description {
+        font-size:20px;
+    }
+
+    .job-info {
+        margin-bottom:5px;
+    }
+
+
+
+    .job-title, .degree {
+        font-weight:700;
+        font-size:16px;
+    }
+
+    .experience-timeperiod, .education-timeperiod {
+        font-weight:100;
+        font-size:16px;
+    }
+
+    .education {
+        margin: 10px 0 10px;
+    }
+
+    #skill-list {
+        column-count: 3;
+        list-style-position: inside;
+        ul li {
+            font-size:14px;
         }
+    }
 
-        .company, .education-description {
-            font-size:20px;
-        }
-
-        .job-info {
-            margin-bottom:5px;
-        }
-
-
-
-        .job-title, .degree {
-            font-weight:700;
-            font-size:16px;
-        }
-
-        .experience-timeperiod, .education-timeperiod {
-            font-weight:100;
-            font-size:16px;
-        }
-
-        .education {
-            margin: 10px 0 10px;
-        }
-
-        #skill-list {
-            column-count: 3;
-            list-style-position: inside;
-            ul li {
-                font-size:14px;
-            }
-        }
-
-        #education-container, #skills-container {
-            margin-top: 20px;
-        }
+    #education-container, #skills-container {
+        margin-top: 20px;
     }
 }
 </style>
