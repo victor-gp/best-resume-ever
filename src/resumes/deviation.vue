@@ -5,7 +5,7 @@
     <div id="resume-header">
         <div id="header-left">
             <h2 id="position">{{person.position}}</h2>
-            <h1 id="name">{{person.name.first}}</h1>
+            <h1 id="name">{{person.name.first + ' ' + person.name.last}}</h1>
             <div id="info-flex">
                 <span id="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{person.contact.city}}</span>
                 <span id="email"><a :href='"mailto:" + person.contact.email'>
@@ -18,6 +18,9 @@
         </div>
         <div id="header-right">
             <div id="headshot"></div>
+        </div>
+        <div v-if="person.about" id="about">
+            <p>{{person.about}}</p>
         </div>
     </div>
     <div id="resume-body">
@@ -53,12 +56,6 @@
                   </span>
                 </li>
             </ul>
-        </div>
-    </div>
-    <div id="resume-footer">
-        <div v-if="person.about">
-            <h2>{{ lang.about }}</h2>
-            <p>{{person.about}}</p>
         </div>
     </div>
 </div>
@@ -98,7 +95,7 @@ export default Vue.component(name, getVueOptions(name));
     }
 
     a {
-        color:#FFF;
+        color: black;
         text-decoration:none;
     }
 
@@ -107,11 +104,7 @@ export default Vue.component(name, getVueOptions(name));
     }
 
     #resume-header {
-        color: white;
-        height: 136px;
-        background-color: purple;
-        box-shadow: inset 0px 0px 200px #301030;
-        padding: 30px 30px 8px;
+        margin: 30px 30px 8px;
 
         #header-left {
             /*width: 465px;*/
@@ -119,13 +112,11 @@ export default Vue.component(name, getVueOptions(name));
             float: left;
             h1 {
                 font-size:49px;
-                color:white;
                 // text-transform:uppercase;
                 line-height:56px;
             }
             h2 {
                 font-size:22px;
-                color:white;
             }
             #info-flex {
                 display:flex;
@@ -160,10 +151,19 @@ export default Vue.component(name, getVueOptions(name));
                 background-size:cover;
             }
         }*/
+
+        #about {
+            padding-top: 20px; // fixme: this hack
+            margin: 20px 50px;  // on the sides: 50 + 30 (from #header) = 80 (same as #body)
+            clear: both;
+            p {
+                font-size: 14px;
+            }
+        }
     }
 
     #resume-body {
-        padding: 10px 80px;
+        margin: 10px 80px;
 
         div.section-separator {
             overflow: hidden;
@@ -227,19 +227,5 @@ export default Vue.component(name, getVueOptions(name));
             margin-top: 20px;
         }
     }
-    #resume-footer {
-        padding: 20px 100px;
-        height: 135px;
-        background-color: purple;
-        box-shadow: inset 0px 0px 100px #301030;
-        box-sizing: border-box;
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        h2, p {
-            color:white;
-        }
-    }
-
 }
 </style>
