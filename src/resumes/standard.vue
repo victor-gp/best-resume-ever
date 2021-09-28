@@ -3,13 +3,15 @@
     <div id="resume-header">
         <div id="header-left">
             <h2 id="position">{{person.position}}</h2>
-            <h1 id="name">{{person.name.first}} {{person.name.last}}</h1>
+            <h1 id="name">{{person.name}}</h1>
             <div id="info-flex">
+                <span id="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{person.contact.location}}</span>
                 <span id="email"><a :href='"mailto:" + person.contact.email'>
-                  <i class="fa fa-envelope" aria-hidden="true"></i> {{person.contact.email}}</a></span>
-                <span id="phone"><i class='fa fa-phone-square' aria-hidden="true"></i> {{person.contact.phone}}</span>
+                  <i class="fa fa-envelope-o" aria-hidden="true"></i> {{person.contact.email}}</a></span>
+                <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i> {{person.contact.phone}}</span>
                 <span v-if="person.contact.website" id="website"><a :href='person.contact.website'><i class="fa fa-home" aria-hidden="true"></i> {{person.contact.website}}</a></span>
                 <span v-if="person.contact.github" id="github"><a :href='contactLinks.github'><i class="fa fa-github" aria-hidden="true"></i> {{person.contact.github}}</a></span>
+                <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin'><i class="fa fa-linkedin-square" aria-hidden="true"></i> {{person.contact.linkedin}}</a></span>
             </div>
         </div>
         <div id="header-right">
@@ -67,7 +69,7 @@
 import Vue from 'vue';
 import { getVueOptions } from './options';
 
-const name = 'purple';
+const name = 'standard';
 export default Vue.component(name, getVueOptions(name));
 </script>
 
@@ -107,16 +109,16 @@ export default Vue.component(name, getVueOptions(name));
         height: 136px;
         background-color: purple;
         box-shadow: inset 0px 0px 200px #301030;
-        padding: 40px 100px 25px;
+        padding: 30px 30px 8px;
 
         #header-left {
             /*width: 465px;*/
             width:100%;
             float: left;
             h1 {
-                font-size:56px;
+                font-size:49px;
                 color:white;
-                text-transform:uppercase;
+                // text-transform:uppercase;
                 line-height:56px;
             }
             h2 {
@@ -125,7 +127,7 @@ export default Vue.component(name, getVueOptions(name));
             }
             #info-flex {
                 display:flex;
-                margin-top:20px;
+                margin-top:8px;
                 font-size:14px;
 
                 span {
@@ -133,6 +135,9 @@ export default Vue.component(name, getVueOptions(name));
                 }
                 i {
                     margin-right:5px;
+                }
+                .fa-github {
+                    font-size: 115%
                 }
             }
         }
