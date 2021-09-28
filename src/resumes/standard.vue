@@ -3,9 +3,9 @@
     <div id="resume-header">
         <div id="header-left">
             <h2 id="position">{{person.position}}</h2>
-            <h1 id="name">{{person.name}}</h1>
+            <h1 id="name">{{person.name.first}}</h1>
             <div id="info-flex">
-                <span id="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{person.contact.location}}</span>
+                <span id="location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{person.contact.city}}</span>
                 <span id="email"><a :href='"mailto:" + person.contact.email'>
                   <i class="fa fa-envelope-o" aria-hidden="true"></i> {{person.contact.email}}</a></span>
                 <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i> {{person.contact.phone}}</span>
