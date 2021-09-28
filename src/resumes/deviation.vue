@@ -1,3 +1,5 @@
+// based on some of the templates in <https://standardresume.co/>
+
 <template>
 <div class="resume" id="template">
     <div id="resume-header">
@@ -70,7 +72,7 @@
 import Vue from 'vue';
 import { getVueOptions } from './options';
 
-const name = 'standard';
+const name = 'deviation';
 export default Vue.component(name, getVueOptions(name));
 </script>
 
