@@ -127,11 +127,8 @@ export default Vue.component(name, getVueOptions(name));
 #contact-info {
     margin-top: 10px;
     display: flex;
-    // takes the full width of the document
-    justify-content: space-between;
-
+    justify-content: space-between; // takes the full width of the document
     font-size: 13px;
-    color: @flavor-color; // todo: give this some thought
 
     span {
         // use this if justify-content leaves too much space between elements
@@ -143,6 +140,7 @@ export default Vue.component(name, getVueOptions(name));
     }
     i {
         margin-right: 0.5em; // space after each icon
+        color: @flavor-color;
     }
     .fa-github {
         color: black;
