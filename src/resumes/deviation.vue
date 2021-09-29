@@ -118,10 +118,12 @@ export default Vue.component(name, getVueOptions(name));
         max-height: 100%;
         object-fit: scale-down;
         right: 0px;
+
         // makes the photo rounded
         border-radius: 50%;
         /* padding-bottom: 10px; // looks eggy but cool! */
-        // todo: give a border (very thin) to the photo
+        box-sizing: border-box;
+        border: solid 1.5px #bbb;
     }
 }
 #contact-info {
