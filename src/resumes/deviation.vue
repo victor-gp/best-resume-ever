@@ -78,28 +78,20 @@ export default Vue.component(name, getVueOptions(name));
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
+
 @flavor-color: #2a3ffb;
 
 #page-container {
-    box-sizing:border-box;
-    margin: 55px 80px 8px; // cannot set border-box & margins in #template
-    font-family:'Barlow', sans-serif;
+    box-sizing: border-box;
+    // can't set document margins in #template
+    margin: 55px 80px 8px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
 
-    h1, h2 {
-        /*font-family:'Open Sans Condensed', sans-serif;*/
-        margin:0;
-    }
-
-    p {
-        margin:0;
-        font-size:12px;
-    }
-
-    ul li {
-        font-size:12px;
+    h1, h2, p {
+        margin: 0;
     }
 }
-
 #header-container {
     display: flex;
 }
@@ -125,11 +117,12 @@ export default Vue.component(name, getVueOptions(name));
         max-height: 100%;
         object-fit: scale-down;
         right: 0px;
+        // makes the photo rounded
         border-radius: 50%;
-        // padding-bottom: 10px; // looks eggy but cool!
+        /* padding-bottom: 10px; // looks eggy but cool! */
+        // todo: give a border (very thin) to the photo
     }
 }
-
 #contact-info {
     margin-top: 8px;
     display: flex;
@@ -156,7 +149,6 @@ export default Vue.component(name, getVueOptions(name));
         color: #0077b5; // linkedin blue
     }
 }
-
 #about {
     clear: both;
     margin-top: 16px;
