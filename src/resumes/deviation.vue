@@ -84,7 +84,7 @@ export default Vue.component(name, getVueOptions(name));
 #page-container {
     box-sizing: border-box;
     // can't set document margins in #template
-    margin: 55px 80px 8px;
+    margin: 55px 80px 30px;
     font-family: 'Barlow', sans-serif;
     font-size: 12px;
 
@@ -97,10 +97,8 @@ export default Vue.component(name, getVueOptions(name));
 }
 #header-left {
     h1 {
-        font-size:42px;
-        line-height:56px;
-        /* todo: the disconnect b/w this & font-size looks good, but it breaks bottom-alignment with the photo,
-        makes that look too close to contact-info. I should reproduce it with margins + padding */
+        font-size: 42px;
+        padding-top: 3px;
     }
     h2 {
         font-size:22px;
@@ -110,6 +108,9 @@ export default Vue.component(name, getVueOptions(name));
     position: relative;
     // takes the leftover horizontal space so that #headshot can be right aligned
     flex-grow: 1;
+    /* aligns with the bottom of #header-left, cause there's too much negative space below letters.
+       (!) this is totally font and font-size dependent, fine tune as needed. */
+    margin-bottom: 2px;
 
     #headshot {
         // along with the parent's relative pos, makes this.height relative to #header-left. somehow XD
@@ -124,7 +125,7 @@ export default Vue.component(name, getVueOptions(name));
     }
 }
 #contact-info {
-    margin-top: 8px;
+    margin-top: 10px;
     display: flex;
     justify-content: space-between; // takes the full width of the document
 
