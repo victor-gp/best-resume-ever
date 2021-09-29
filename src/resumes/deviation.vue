@@ -127,20 +127,22 @@ export default Vue.component(name, getVueOptions(name));
 #contact-info {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between; // takes the full width of the document
+    // takes the full width of the document
+    justify-content: space-between;
 
     font-size: 13px;
     color: @flavor-color; // todo: give this some thought
 
     span {
-        //margin-right: 20px;
-    }
-    i {
-        margin-right: 0.5em;
+        // use this if justify-content leaves too much space between elements
+        // margin-right: 20px;
     }
     a {
         text-decoration: none; // no underline for links
         color: inherit; // don't change color on :visited
+    }
+    i {
+        margin-right: 0.5em; // space after each icon
     }
     .fa-github {
         color: black;
@@ -151,30 +153,29 @@ export default Vue.component(name, getVueOptions(name));
     }
 }
 #about {
-    clear: both;
     margin-top: 16px;
-    margin-bottom: 30px;
-    p {
-        font-size: 14px;
-    }
+    font-size: 14px;
 }
 
 #resume-body {
-    margin: 10px 0;
-
     div.section-separator {
         overflow: hidden;
         white-space: nowrap;
-        color: @flavor-color;
+
+        margin-top: 16px;
+
         font-weight: 500;
         font-size: 16px;
+        color: @flavor-color;
 
         hr {
             display: inline-block;
             width: 100%;
             position: relative;
-            top: 0.55ex;
+
             margin-left: 0.8em;
+            top: 0.55ex;
+
             border: none;
             border-bottom: 1pt solid;
             color: @flavor-color;
