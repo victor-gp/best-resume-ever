@@ -32,12 +32,10 @@
                 <div class="col job-company"><span>{{experience.company}}</span></div>
                 <div class="col time-period"><span>{{experience.timeperiod}}</span></div>
             </div>
-            <p class="job-description" v-if="experience.description">{{experience.description}}</p>
-            <ul v-if="experience.list">
-                <li v-for="(item, index) in experience.list" :key="index">
-                    <span class="list-item-black">
-                    {{item}}
-                    </span>
+            <p v-if="experience.description" class="job-description">{{experience.description}}</p>
+            <ul v-if="experience.list" class="job-bullets">
+                <li v-for="(item, index) in experience.list" class="job-bullet" :key="index">
+                    <span>{{ item }}</span>
                 </li>
             </ul>
         </div>
@@ -225,8 +223,16 @@ section > header {
             font-weight: bold;
         }
     }
-    ul {
-        margin-top: 5px;
+    .job-bullets {
+        padding-left: 0;
+        list-style-position: inside;
+    }
+    .job-bullet + .job-bullet {
+        margin-top: 1ex;
+    }
+    .job-bullet > span {
+        padding-left: 0.3em;
+        font-size: 14px;
     }
 }
 .edu-description {
