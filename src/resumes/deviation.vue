@@ -88,10 +88,9 @@ export default Vue.component(name, getVueOptions(name));
     margin: 55px 80px 30px;
     font-family: 'Barlow', sans-serif;
     font-size: 12px;
-
-    h1, h2, p {
-        margin: 0;
-    }
+}
+h1, h2, p {
+    margin: 0;
 }
 #header-container {
     display: flex;
