@@ -28,8 +28,8 @@
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="experience in person.experience" :key="experience.company">
             <div class="row-3-period job-info">
-                <div class="col job-company"><h3>{{experience.company}}</h3></div>
-                <div class="col job-position"><span>{{experience.position}}</span></div>
+                <div class="col job-position"><h3>{{experience.position}}</h3></div>
+                <div class="col job-company"><span>{{experience.company}}</span></div>
                 <div class="col time-period"><span>{{experience.timeperiod}}</span></div>
             </div>
             <p class="job-description" v-if="experience.description">{{experience.description}}</p>
@@ -195,7 +195,7 @@ section > header {
         margin-top: auto; // bottom align
     }
     .col:nth-of-type(1) {
-        flex: 0 33%; // left align 2nd cols
+        flex: 0 40%; // left align 2nd cols
         h3 {
             display: inline;
         }
@@ -216,11 +216,11 @@ section > header {
 .experience {
     .job-info {
         margin-bottom: 1em;
-        .job-company h3 {
+        .job-position h3 {
             font-size: 15px;
             font-weight: bold;
         }
-        .job-position {
+        .job-company {
             font-size: 13px;
             font-weight: bold;
         }
