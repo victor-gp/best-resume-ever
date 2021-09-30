@@ -30,10 +30,13 @@
         <div id="experience-container">
             <div class="section-separator">{{ lang.experience }}<hr/></div>
             <div class="experience" v-for="experience in person.experience" :key="experience.company">
-                <h2 class="company">{{experience.company}}</h2>
-                <p class="job-info"><span class="job-title">{{experience.position}} | </span><span class="experience-timeperiod">{{experience.timeperiod}}</span></p>
+                <div class="row-3 job-info">
+                    <div class="col job-company"><h3>{{experience.company}}</h3></div>
+                    <div class="col job-position"><span>{{experience.position}}</span></div>
+                    <div class="col job-period time-period"><span>{{experience.timeperiod}}</span></div>
+                </div>
                 <p class="job-description" v-if="experience.description">{{experience.description}}</p>
-                <ul v-if="experience.list" >
+                <ul v-if="experience.list">
                     <li v-for="(item, index) in experience.list" :key="index">
                       <span class="list-item-black">
                         {{item}}
@@ -179,9 +182,49 @@ export default Vue.component(name, getVueOptions(name));
             color: @flavor-color;
         }
     }
+    .row-3 {
+        display: flex;
+        .col {
+            margin-top: auto; // bottom align
+        }
+        .col:nth-of-type(1) {
+            flex: 0 33%; // left align 2nd cols
+        }
+        .col:nth-of-type(3) {
+            flex: 1;
+            position: relative;
+            span {
+                position: absolute;
+                right: 0;
+                bottom: 0; // patch bottom align
+            }
+        }
+        h3, span {
+            display: inline;
+        }
+    }
 
+    .experience + .experience {
+        margin-top: 2em;
+    }
     .experience {
-        margin: 10px 0 10px;
+        margin-top: 1em; // applies to first experience only
+        .job-info {
+            margin-bottom: 1em;
+            .job-company {
+                font-size: 15px;
+                font-weight: bold;
+            }
+            .job-position {
+                font-size: 13px;
+                font-weight: bold;
+            }
+            .job-period {
+                font-size: 13px;
+                font-weight: bold;
+                color: #4f5157;
+            }
+        }
         ul {
             margin-top: 5px;
         }
