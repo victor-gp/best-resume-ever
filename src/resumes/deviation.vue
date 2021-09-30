@@ -23,51 +23,47 @@
         <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
             <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{person.contact.linkedin}}</a></span>
     </div>
-    <div v-if="person.about" id="about">
-        <p>{{person.about}}</p>
-    </div>
-    <div id="resume-body">
-        <section id="experience-section" class="timeline">
-            <header><h2>{{ lang.experience }}</h2><hr/></header>
-            <div class="experience" v-for="experience in person.experience" :key="experience.company">
-                <div class="row-3-period job-info">
-                    <div class="col job-company"><h3>{{experience.company}}</h3></div>
-                    <div class="col job-position"><span>{{experience.position}}</span></div>
-                    <div class="col job-period time-period"><span>{{experience.timeperiod}}</span></div>
-                </div>
-                <p class="job-description" v-if="experience.description">{{experience.description}}</p>
-                <ul v-if="experience.list">
-                    <li v-for="(item, index) in experience.list" :key="index">
-                      <span class="list-item-black">
-                        {{item}}
-                      </span>
-                    </li>
-                </ul>
+    <div v-if="person.about" id="about"><p>{{person.about}}</p></div>
+    <section id="experience-section" class="timeline">
+        <header><h2>{{ lang.experience }}</h2><hr/></header>
+        <div class="experience" v-for="experience in person.experience" :key="experience.company">
+            <div class="row-3-period job-info">
+                <div class="col job-company"><h3>{{experience.company}}</h3></div>
+                <div class="col job-position"><span>{{experience.position}}</span></div>
+                <div class="col time-period"><span>{{experience.timeperiod}}</span></div>
             </div>
-        </section>
-        <section id="education-section" class="timeline">
-            <header><h2>{{ lang.education }}</h2><hr/></header>
-            <div class="education" v-for="education in person.education" :key="education.degree">
-                <div class="row-3-period">
-                    <div class="col edu-degree"><h3>{{ education.degree }}</h3></div>
-                    <div class="col edu-institution"><span>{{ education.institution || "Lorem Ipsum" }}</span></div>
-                    <div class="col time-period"><span>{{ education.timeperiod }}</span></div>
-                </div>
-                <p class="edu-description">{{ education.description }}</p>
-            </div>
-        </section>
-        <section id="skills-section" class="item-list" v-if="person.skills != []">
-            <header><h2>{{ lang.skills }}</h2><hr/></header>
-            <p id="skill-description">{{person.knowledge}}</p>
-            <ul id="skill-list">
-                <li class="skill" v-for="skill in person.skills" :key="skill.name">
-                  <span class="list-item-black">
-                    {{skill.name}}
-                  </span>
+            <p class="job-description" v-if="experience.description">{{experience.description}}</p>
+            <ul v-if="experience.list">
+                <li v-for="(item, index) in experience.list" :key="index">
+                    <span class="list-item-black">
+                    {{item}}
+                    </span>
                 </li>
             </ul>
-        </section>
-    </div>
+        </div>
+    </section>
+    <section id="education-section" class="timeline">
+        <header><h2>{{ lang.education }}</h2><hr/></header>
+        <div class="education" v-for="education in person.education" :key="education.degree">
+            <div class="row-3-period">
+                <div class="col edu-degree"><h3>{{ education.degree }}</h3></div>
+                <div class="col edu-institution"><span>{{ education.institution || "Lorem Ipsum" }}</span></div>
+                <div class="col time-period"><span>{{ education.timeperiod }}</span></div>
+            </div>
+            <p class="edu-description">{{ education.description }}</p>
+        </div>
+    </section>
+    <section id="skills-section" class="item-list" v-if="person.skills != []">
+        <header><h2>{{ lang.skills }}</h2><hr/></header>
+        <p id="skill-description">{{person.knowledge}}</p>
+        <ul id="skill-list">
+            <li class="skill" v-for="skill in person.skills" :key="skill.name">
+                <span class="list-item-black">
+                {{skill.name}}
+                </span>
+            </li>
+        </ul>
+    </section>
 </div></div>
 </template>
 
@@ -103,12 +99,12 @@ export default Vue.component(name, getVueOptions(name));
     display: flex;
 }
 #header-left {
+    h2 {
+        font-size:22px;
+    }
     h1 {
         font-size: 42px;
         padding-top: 3px;
-    }
-    h2 {
-        font-size:22px;
     }
 }
 #header-right {
@@ -161,89 +157,86 @@ export default Vue.component(name, getVueOptions(name));
     margin-top: 16px;
     font-size: 14px;
 }
-
-#resume-body {
-    section.timeline {
-        // 1st item
-        div {
-            margin-top: 1em;
-        }
-        // later items
-        div + div {
-            margin-top: 2em;
+section.timeline {
+    // 1st item
+    div {
+        margin-top: 1em;
+    }
+    // later items
+    div + div {
+        margin-top: 2em;
+    }
+}
+section > header {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: @flavor-color;
+    h2 {
+        display: inline-block;
+        font-size: 1em;
+    }
+    hr {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin-left: 0.8em;
+        top: 0.55ex;
+        border: none;
+        border-bottom: 1pt solid;
+        color: inherit;
+    }
+}
+.row-3-period {
+    display: flex;
+    .col {
+        margin-top: auto; // bottom align
+    }
+    .col:nth-of-type(1) {
+        flex: 0 33%; // left align 2nd cols
+        h3 {
+            display: inline;
         }
     }
-    section > header {
-        overflow: hidden;
-        white-space: nowrap;
-        margin-top: 16px;
-        font-size: 16px;
-        font-weight: bold;
-        color: @flavor-color;
-        h2 {
-            display: inline-block;
-            font-size: 1em;
-        }
-        hr {
-            display: inline-block;
-            width: 100%;
-            position: relative;
-            margin-left: 0.8em;
-            top: 0.55ex;
-            border: none;
-            border-bottom: 1pt solid;
-            color: inherit;
+    .col:nth-of-type(3).time-period {
+        flex-grow: 1;
+        position: relative;
+        span {
+            position: absolute;
+            right: 0; // right align
+            bottom: 0; // (absolute) bottom align
+            font-size: 13px;
+            font-weight: bold;
+            color: #4f5157;
         }
     }
-    .row-3-period {
-        display: flex;
-        .col {
-            margin-top: auto; // bottom align
+}
+.experience {
+    .job-info {
+        margin-bottom: 1em;
+        .job-company h3 {
+            font-size: 15px;
+            font-weight: bold;
         }
-        .col:nth-of-type(1) {
-            flex: 0 33%; // left align 2nd cols
-            h3 {
-                display: inline;
-            }
-        }
-        .col:nth-of-type(3).time-period {
-            flex-grow: 1;
-            position: relative;
-            span {
-                position: absolute;
-                right: 0; // right align
-                bottom: 0; // (absolute) bottom align
-                font-size: 13px;
-                font-weight: bold;
-                color: #4f5157;
-            }
+        .job-position {
+            font-size: 13px;
+            font-weight: bold;
         }
     }
-    .experience {
-        .job-info {
-            margin-bottom: 1em;
-            .job-company h3 {
-                font-size: 15px;
-                font-weight: bold;
-            }
-            .job-position {
-                font-size: 13px;
-                font-weight: bold;
-            }
-        }
-        ul {
-            margin-top: 5px;
-        }
+    ul {
+        margin-top: 5px;
     }
-    .edu-description {
-        margin-top: 1ex;
-    }
-    #skill-list {
-        column-count: 3;
-        list-style-position: inside;
-        ul li {
-            font-size:14px;
-        }
+}
+.edu-description {
+    margin-top: 1ex;
+}
+#skill-list {
+    column-count: 3;
+    list-style-position: inside;
+    ul li {
+        font-size:14px;
     }
 }
 </style>
