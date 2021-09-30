@@ -34,6 +34,7 @@
     "npm-font-open-sans": "1.1.0",
     "npm-font-open-sans-condensed": "1.0.3",
     "raleway-webfont": "3.0.1",
+    "raw-loader": "^4.0.2",
     "roboto-fontface": "0.10.0",
     "source-sans-pro": "2.20.2",
     "vue": "2.5.17",

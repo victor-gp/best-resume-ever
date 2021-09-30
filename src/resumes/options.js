@@ -1,7 +1,5 @@
 import yaml from 'js-yaml';
-import {
-    PERSON
-} from '../../resume/data.yml';
+const personYaml = require('!!raw-loader!../../resume/data.yml').default.toString();
 import {
     terms
 } from '../terms';
@@ -12,7 +10,7 @@ function getVueOptions (name) {
         name: name,
         data () {
             return {
-                person: yaml.load(PERSON),
+                person: yaml.load(personYaml),
                 terms: terms,
             };
         },
