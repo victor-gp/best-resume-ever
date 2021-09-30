@@ -28,7 +28,7 @@
     </div>
     <div id="resume-body">
         <div id="experience-container">
-            <div class="section-separator">{{ lang.experience }}<hr/></div>
+            <div class="section-separator"><h2>{{ lang.experience }}</h2><hr/></div>
             <div class="experience" v-for="experience in person.experience" :key="experience.company">
                 <div class="row-3 job-info">
                     <div class="col job-company"><h3>{{experience.company}}</h3></div>
@@ -162,24 +162,23 @@ export default Vue.component(name, getVueOptions(name));
     div.section-separator {
         overflow: hidden;
         white-space: nowrap;
-
         margin-top: 16px;
-
-        font-weight: 500;
         font-size: 16px;
+        font-weight: bold;
         color: @flavor-color;
-
+        h2 {
+            display: inline-block;
+            font-size: 1em;
+        }
         hr {
             display: inline-block;
             width: 100%;
             position: relative;
-
             margin-left: 0.8em;
             top: 0.55ex;
-
             border: none;
             border-bottom: 1pt solid;
-            color: @flavor-color;
+            color: inherit;
         }
     }
     .row-3 {
@@ -211,7 +210,7 @@ export default Vue.component(name, getVueOptions(name));
         margin-top: 1em; // applies to first experience only
         .job-info {
             margin-bottom: 1em;
-            .job-company {
+            .job-company h3 {
                 font-size: 15px;
                 font-weight: bold;
             }
