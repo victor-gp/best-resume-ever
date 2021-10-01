@@ -72,13 +72,14 @@ export default Vue.component(name, getVueOptions(name));
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap');
 </style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 
 @flavor-color: #2a3ffb;
+@off-black: #4f5157;
 
 #page-container {
     box-sizing: border-box;
@@ -96,9 +97,12 @@ h1, h2, p {
 #header-left {
     h2 {
         font-size:22px;
+        font-weight: 500;
+        color: @off-black;
     }
     h1 {
         font-size: 42px;
+        font-weight: 500;
         padding-top: 3px;
     }
 }
@@ -202,7 +206,7 @@ section > * + * {
             bottom: 0; // (absolute) bottom align
             font-size: 13px;
             font-weight: bold;
-            color: #4f5157;
+            color: @off-black;
         }
     }
 }
@@ -218,16 +222,16 @@ section > * + * {
             font-weight: bold;
         }
     }
-    .job-bullets { // <ul>
+    ul.job-bullets {
         padding-left: 0;
-        list-style-position: inside;
+        list-style-position: outside;
+    }
+    li.job-bullet {
+        font-size: 14px;
+        margin-left: 1.2em;
     }
     .job-bullet + .job-bullet {
         margin-top: 1ex;
-    }
-    .job-bullet > span {
-        padding-left: 0.3em;
-        font-size: 14px;
     }
 }
 .edu-description {
@@ -241,7 +245,7 @@ section > * + * {
     list-style-type: none; // no bullets
     .skill { // <li>
         padding: 0 1em;
-        border-left: 1.5px solid;
+        border-left: 1px solid;
         font-size: 1.1em;
         font-weight: bold;
     }
