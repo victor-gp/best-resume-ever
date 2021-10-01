@@ -4,37 +4,37 @@
 <div class="resume" id="template"><div id="page-container">
     <div id="header-container">
         <div id="header-left">
-            <h2 id="position">{{person.position}}</h2>
-            <h1 id="name">{{person.name.first + ' ' + person.name.last}}</h1>
+            <h2 id="position">{{ person.position }}</h2>
+            <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
         </div>
         <div id="header-right">
             <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
         </div>
     </div>
     <div id="contact-info">
-        <span v-if="person.contact.city" id="location"><i class="fa fa-map-marker" aria-hidden="true"></i>{{person.contact.city}}</span>
+        <span id="location" v-if="person.contact.city"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ person.contact.city }}</span>
         <span id="email"><a :href='"mailto:" + person.contact.email'>
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>{{person.contact.email}}</a></span>
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>{{ person.contact.email }}</a></span>
         <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
-        <span v-if="person.contact.website" id="website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-home" aria-hidden="true"></i>{{person.contact.website}}</a></span>
-        <span v-if="person.contact.github" id="github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-github" aria-hidden="true"></i>{{person.contact.github}}</a></span>
-        <span v-if="person.contact.linkedin" id="linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{person.contact.linkedin}}</a></span>
+        <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-home" aria-hidden="true"></i>{{ person.contact.website }}</a></span>
+        <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-github" aria-hidden="true"></i>{{ person.contact.github }}</a></span>
+        <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
     </div>
-    <div v-if="person.about" id="about"><p>{{person.about}}</p></div>
+    <div id="about" v-if="person.about"><p>{{ person.about }}</p></div>
     <section id="experience-section">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="experience in person.experience" :key="experience.company">
             <div class="row-3-period job-info">
-                <div class="col job-position"><h3>{{experience.position}}</h3></div>
-                <div class="col job-company"><span>{{experience.company}}</span></div>
-                <div class="col time-period"><span>{{experience.timeperiod}}</span></div>
+                <div class="col job-position"><h3>{{ experience.position }}</h3></div>
+                <div class="col job-company"><span>{{ experience.company }}</span></div>
+                <div class="col time-period"><span>{{ experience.timeperiod }}</span></div>
             </div>
-            <p v-if="experience.description" class="job-description">{{experience.description}}</p>
-            <ul v-if="experience.list" class="job-bullets">
-                <li v-for="(item, index) in experience.list" class="job-bullet" :key="index">
+            <p class="job-description" v-if="experience.description">{{ experience.description }}</p>
+            <ul class="job-bullets" v-if="experience.list">
+                <li class="job-bullet" v-for="(item, index) in experience.list" :key="index">
                     <span>{{ item }}</span>
                 </li>
             </ul>
@@ -51,10 +51,10 @@
             <p class="edu-description">{{ education.description }}</p>
         </div>
     </section>
-    <section v-if="person.skills != []" id="skills-section">
+    <section id="skills-section" v-if="person.skills != []">
         <header><h2>{{ lang.skills }}</h2><hr/></header>
         <ul id="skill-list">
-            <li class="skill" v-for="skill in person.skills" :key="skill.name" :id="'skill-' + skill.name">
+            <li class="skill" :id="'skill-' + skill.name" v-for="skill in person.skills" :key="skill.name">
                 <span>{{ skill.name }}</span>
             </li>
         </ul>
