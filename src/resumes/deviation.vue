@@ -24,7 +24,7 @@
             <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{person.contact.linkedin}}</a></span>
     </div>
     <div v-if="person.about" id="about"><p>{{person.about}}</p></div>
-    <section id="experience-section" class="timeline">
+    <section id="experience-section">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="experience in person.experience" :key="experience.company">
             <div class="row-3-period job-info">
@@ -40,7 +40,7 @@
             </ul>
         </div>
     </section>
-    <section id="education-section" class="timeline">
+    <section id="education-section">
         <header><h2>{{ lang.education }}</h2><hr/></header>
         <div class="education" v-for="education in person.education" :key="education.degree">
             <div class="row-3-period">
@@ -51,16 +51,14 @@
             <p class="edu-description">{{ education.description }}</p>
         </div>
     </section>
-    <section id="skills-section" class="item-list" v-if="person.skills != []">
+    <section v-if="person.skills != []" id="skills-section">
         <header><h2>{{ lang.skills }}</h2><hr/></header>
-        <p id="skill-description">{{person.knowledge}}</p>
         <ul id="skill-list">
-            <li class="skill" v-for="skill in person.skills" :key="skill.name">
-                <span class="list-item-black">
-                {{skill.name}}
-                </span>
+            <li class="skill" v-for="skill in person.skills" :key="skill.name" :id="'skill-' + skill.name">
+                <span>{{ skill.name }}</span>
             </li>
         </ul>
+        <p id="skills-knowledge">{{ person.knowledge }}</p>
     </section>
 </div></div>
 </template>
@@ -154,16 +152,6 @@ h1, h2, p {
     margin-top: 16px;
     font-size: 14px;
 }
-section.timeline {
-    // 1st item
-    div {
-        margin-top: 1em;
-    }
-    // later items
-    div + div {
-        margin-top: 2em;
-    }
-}
 section > header {
     overflow: hidden;
     white-space: nowrap;
@@ -185,6 +173,14 @@ section > header {
         border-bottom: 1pt solid;
         color: inherit;
     }
+}
+// first block
+section > header + * {
+    margin-top: 1em;
+}
+// later blocks
+section > * + * {
+    margin-top: 2em;
 }
 .row-3-period {
     display: flex;
@@ -222,7 +218,7 @@ section > header {
             font-weight: bold;
         }
     }
-    .job-bullets {
+    .job-bullets { // <ul>
         padding-left: 0;
         list-style-position: inside;
     }
@@ -237,11 +233,22 @@ section > header {
 .edu-description {
     margin-top: 1ex;
 }
-#skill-list {
-    column-count: 3;
-    list-style-position: inside;
-    ul li {
-        font-size:14px;
+#skill-list { // <ul>
+    display: flex;
+    flex-flow: row wrap;
+    row-gap: 1ex;
+    padding-left: 0;
+    list-style-type: none; // no bullets
+    .skill { // <li>
+        padding: 0 1em;
+        border-left: 1.5px solid;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    // patch the leading element of every row
+    #skill-HTML5 {
+        padding-left: 0;
+        border-left: none;
     }
 }
 </style>
