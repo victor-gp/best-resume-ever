@@ -124,6 +124,7 @@ h1, h2, p {
         border-radius: 50%; // makes the photo rounded
         /* padding-bottom: 10px; // looks eggy but cool! */
         box-shadow: 0 0 2px @flavor-color; // adds a subtle border around the photo
+        /* image-rendering: pixelated; */
     }
 }
 #contact-info {
