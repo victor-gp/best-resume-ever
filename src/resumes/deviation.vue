@@ -54,9 +54,8 @@
     <section id="skills-section" v-if="person.skills != []">
         <header><h2>{{ lang.skills }}</h2><hr/></header>
         <ul id="skill-list">
-            <li class="skill" :id="'skill-' + skill.name" v-for="skill in person.skills" :key="skill.name">
-                <span>{{ skill.name }}</span>
-            </li>
+            <li class="skill" :id="'skill-' + skill.name.replace(/[ \.]/g, '_')"
+                v-for="skill in person.skills" :key="skill.name"><span>{{ skill.name }}</span></li>
         </ul>
         <p id="skills-knowledge">{{ person.knowledge }}</p>
     </section>
@@ -86,7 +85,8 @@ export default Vue.component(name, getVueOptions(name));
     // can't set document margins in #template
     margin: 55px 80px 30px;
     font-family: 'Barlow', sans-serif;
-    font-size: 12px;
+    font-size: 9.5pt;
+    /* font-size: 13px; */
 }
 h1, h2, p {
     margin: 0;
@@ -96,7 +96,7 @@ h1, h2, p {
 }
 #header-left {
     h2 {
-        font-size:22px;
+        font-size:23px;
         font-weight: 500;
         color: @off-black;
     }
@@ -113,29 +113,25 @@ h1, h2, p {
     /* aligns with the bottom of #header-left, cause there's too much negative space below letters.
        (!) this is totally font and font-size dependent, fine tune as needed. */
     margin-bottom: 2px;
-
     #headshot {
-        // along with the parent's relative pos, makes this.height relative to #header-left. somehow XD
         position: absolute;
         max-height: 100%;
         object-fit: scale-down;
-        right: 0px;
+        right: 0;
 
         border-radius: 50%; // makes the photo rounded
-        /* padding-bottom: 10px; // looks eggy but cool! */
+        /* padding-bottom: 10px; */ // looks eggy but cool!
         box-shadow: 0 0 2px @flavor-color; // adds a subtle border around the photo
-        /* image-rendering: pixelated; */
+        /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
     }
 }
 #contact-info {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between; // takes the full width of the document
-    font-size: 13px;
-
+    justify-content: space-between;
     span {
         // use this if justify-content leaves too much space between elements
-        // margin-right: 20px;
+        /* margin-right: 20px; */
     }
     a {
         text-decoration: none; // no underline for links
@@ -153,20 +149,19 @@ h1, h2, p {
         color: #0077b5; // linkedin blue
     }
 }
-#about {
-    margin-top: 16px;
-    font-size: 14px;
+#about > p {
+    font-size: 1.05em;
+    margin-top: 1.5em;
 }
 section > header {
     overflow: hidden;
     white-space: nowrap;
-    margin-top: 16px;
-    font-size: 16px;
-    font-weight: bold;
     color: @flavor-color;
     h2 {
         display: inline-block;
-        font-size: 1em;
+        font-size: 1.375em;
+        font-weight: bold;
+        margin-top: 2em;
     }
     hr {
         display: inline-block;
@@ -178,14 +173,6 @@ section > header {
         border-bottom: 1pt solid;
         color: inherit;
     }
-}
-// first block
-section > header + * {
-    margin-top: 1em;
-}
-// later blocks
-section > * + * {
-    margin-top: 2em;
 }
 .row-3-period {
     display: flex;
@@ -205,55 +192,84 @@ section > * + * {
             position: absolute;
             right: 0; // right align
             bottom: 0; // (absolute) bottom align
-            font-size: 13px;
             font-weight: bold;
             color: @off-black;
         }
     }
 }
+// first block
+header + .experience {
+    margin-top: calc(1.25 * 1.5em);
+}
 .experience {
+    // later blocks
+    margin-top: calc(1.25 * 2em);
     .job-info {
-        margin-bottom: 1em;
-        .job-position h3 {
-            font-size: 15px;
+        margin-bottom: calc(1.25 * 1.5em);
+        .job-position > h3 {
+            font-size: 1.25em;
             font-weight: bold;
         }
         .job-company {
-            font-size: 13px;
             font-weight: bold;
         }
     }
     ul.job-bullets {
         padding-left: 0;
         list-style-position: outside;
+        margin: 0;
     }
     li.job-bullet {
-        font-size: 14px;
         margin-left: 1.2em;
     }
     .job-bullet + .job-bullet {
         margin-top: 1ex;
     }
 }
-.edu-description {
-    margin-top: 1ex;
+// first block
+header + .education {
+    margin-top: calc(1.15 * 1.5em);
+}
+.education {
+    // later blocks
+    margin-top: calc(1.15 * 2em);
+    .edu-degree > h3 {
+        font-size: 1.15em;
+        font-weight: 500;
+    }
+    .edu-institution > span {
+        font-weight: 500;
+    }
+    .edu-description {
+        margin-top: 1em;
+    }
 }
 #skill-list { // <ul>
     display: flex;
     flex-flow: row wrap;
     row-gap: 1ex;
-    padding-left: 0;
+    padding-left: 0; // no indent
     list-style-type: none; // no bullets
-    .skill { // <li>
+    margin: 1.5em 0 0;
+    // rows are left aligned and irregular, better avoid any 100% lines
+    margin-right: 4%;
+    li.skill {
+        font-weight: bold;
         padding: 0 1em;
         border-left: 1px solid;
-        font-size: 1.1em;
-        font-weight: bold;
     }
-    // patch the leading element of every row
-    #skill-HTML5 {
+    // patch the leading item of every row
+    .skill:nth-of-type(1),
+    #skill-Dummy,
         padding-left: 0;
         border-left: none;
     }
+    // patch items that may fit in the previous row
+    #skill-Dummy_with_spaces_ending_in_dot_ {
+        padding-right: 0;
+    }
+}
+#skills-knowledge {
+    margin-top: 1.5em;
 }
 </style>
