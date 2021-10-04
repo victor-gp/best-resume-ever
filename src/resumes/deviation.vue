@@ -247,7 +247,6 @@ header + .education {
 #skill-list { // <ul>
     display: flex;
     flex-flow: row wrap;
-    row-gap: 1ex;
     padding-left: 0; // no indent
     list-style-type: none; // no bullets
     margin: 1.5em 0 0;
@@ -257,6 +256,7 @@ header + .education {
         font-weight: bold;
         padding: 0 1em;
         border-left: 1px solid;
+        margin-bottom: 0.8em;
     }
     // patch the leading item of every row
     .skill:nth-of-type(1),
