@@ -110,9 +110,8 @@ h1, h2, p {
     position: relative;
     // takes the leftover horizontal space so that #headshot can be right aligned
     flex-grow: 1;
-    /* aligns with the bottom of #header-left, cause there's too much negative space below letters.
-       (!) this is totally font and font-size dependent, fine tune as needed. */
-    margin-bottom: 2px;
+    // improve alignment with the bottom of #header-left, fine tune as required
+    margin-bottom: 4px;
     #headshot {
         position: absolute;
         max-height: 100%;
@@ -121,7 +120,7 @@ h1, h2, p {
 
         border-radius: 50%; // makes the photo rounded
         /* padding-bottom: 10px; */ // looks eggy but cool!
-        box-shadow: 0 0 2px @flavor-color; // adds a subtle border around the photo
+        box-shadow: 0 0 2.5px @flavor-color; // adds a subtle border around the photo
         /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
     }
 }
@@ -139,7 +138,7 @@ h1, h2, p {
     }
     i {
         margin-right: 0.5em; // space after each icon
-        color: @flavor-color;
+        color: darken(@flavor-color, 15%);
     }
     .fa-github {
         color: black;
@@ -220,7 +219,7 @@ header + .experience {
         margin: 0;
     }
     li.job-bullet {
-        margin-left: 1.2em;
+        margin-left: 1.25em;
     }
     .job-bullet + .job-bullet {
         margin-top: 1ex;
@@ -255,7 +254,7 @@ header + .education {
     li.skill {
         font-weight: bold;
         padding: 0 1em;
-        border-left: 1px solid;
+        border-left: 0.5px solid;
         margin-bottom: 0.8em;
     }
     // patch the leading item of every row
