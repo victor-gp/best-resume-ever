@@ -66,7 +66,7 @@
 import Vue from 'vue';
 import { getVueOptions } from './options';
 
-const name = 'deviation';
+const name = 'marshall';
 export default Vue.component(name, getVueOptions(name));
 </script>
 
@@ -259,7 +259,7 @@ header + .education {
     }
     // patch the leading item of every row
     .skill:nth-of-type(1),
-    #skill-Dummy,
+    #skill-Dummy {
         padding-left: 0;
         border-left: none;
     }
