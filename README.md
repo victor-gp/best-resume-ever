@@ -56,6 +56,9 @@
 <img src="src/assets/preview/resume-oblique-rtl.png" width="150" style="margin-right:5px; border: 1px solid #ccc;" />
 <img src="src/assets/preview/resume-oblique-projects.png" width="150" style="margin-right:5px; border: 1px solid #ccc;" />
 </p>
+<p>Marshall<br>
+<img src="src/assets/preview/resume-marshall.png" width="150" style="margin-right:5px; border: 1px solid #ccc;" />
+</p>
 </p>
 
 <br>
