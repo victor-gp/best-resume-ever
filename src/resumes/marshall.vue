@@ -21,7 +21,7 @@
         <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
             <i class="fa fa-github" aria-hidden="true"></i>{{ person.contact.github }}</a></span>
         <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-linkedin-square" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
+            <i class="fa fa-linkedin color-linkedin" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
     </div>
     <div id="about" v-if="person.about"><p>{{ person.about }}</p></div>
     <section id="experience-section">
@@ -120,7 +120,7 @@ h1, h2, p {
 
         border-radius: 50%; // makes the photo rounded
         /* padding-bottom: 10px; */ // looks eggy but cool!
-        box-shadow: 0 0 2.5px @flavor-color; // adds a subtle border around the photo
+        box-shadow: 0 0 2px @flavor-color; // adds a subtle border around the photo
         /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
     }
 }
@@ -142,9 +142,9 @@ h1, h2, p {
     }
     .fa-github {
         color: black;
-        font-size: 115% // coz it's too small, can't make out the octocat!
+        font-size: 115%; // coz it's too small, can't make out the octocat!
     }
-    .fa-linkedin-square {
+    .color-linkedin {
         color: #0077b5; // linkedin blue
     }
 }
