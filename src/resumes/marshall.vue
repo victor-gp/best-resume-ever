@@ -254,14 +254,28 @@ header + .education {
     li.skill {
         font-weight: bold;
         padding: 0 1em;
-        border-left: 0.5px solid;
         margin-bottom: 0.8em;
+        position: relative;
+    }
+    li.skill::before {
+        border-left: thin solid black;
+        margin: 1px 0 1px;
+        -webkit-print-color-adjust: exact;
+        -webkit-filter: opacity(1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: "";
     }
     // patch the leading item of every row
     .skill:nth-of-type(1),
     #skill-Dummy {
         padding-left: 0;
-        border-left: none;
+        &::before {
+            border-left: none;
+        }
     }
     // patch items that may fit in the previous row
     #skill-Dummy_with_spaces_ending_in_dot_ {
