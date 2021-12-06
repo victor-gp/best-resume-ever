@@ -56,7 +56,7 @@ const convert = async () => {
         const directories = getResumesFromDirectories();
         directories.forEach(async (dir) => {
             const browser = await puppeteer.launch({
-                args: ['--no-sandbox']
+                args: ['--no-sandbox', '--font-render-hinting=medium']
             });
             const page = await browser.newPage();
             await page.goto(`http://localhost:${config.dev.port}/#/resume/` + dir.name, {
