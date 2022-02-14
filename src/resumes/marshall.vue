@@ -23,7 +23,7 @@
         <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
             <i class="fa fa-linkedin color-linkedin" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
     </div>
-    <div id="about" v-if="person.about"><p>{{ person.about }}</p></div>
+    <div id="about" v-if="person.about" v-html="person.about"></div>
     <section id="experience-section">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="experience in person.experience" :key="experience.company">
@@ -148,9 +148,15 @@ h1, h2, p {
         color: #0077b5; // linkedin blue
     }
 }
-#about > p {
+#about {
     font-size: 1.05em;
-    margin-top: 1.5em;
+    margin: 1.5em 1em 0;
+    ::v-deep p {
+        margin: 0;
+    }
+    ::v-deep p + p {
+        margin: 0.7em 0 0;
+    }
 }
 section > header {
     overflow: hidden;
