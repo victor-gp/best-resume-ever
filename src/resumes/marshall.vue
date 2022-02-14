@@ -4,8 +4,8 @@
 <div class="resume" id="template"><div id="page-container">
     <div id="header-container">
         <div id="header-left">
-            <h2 id="position">{{ person.position }}</h2>
             <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
+            <h2 id="position">{{ person.position }}</h2>
         </div>
         <div id="header-right">
             <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
@@ -95,15 +95,15 @@ h1, h2, p {
     display: flex;
 }
 #header-left {
-    h2 {
+    #name {
+        font-size: 42px;
+        font-weight: 500;
+    }
+    #position {
         font-size:23px;
         font-weight: 500;
         color: @off-black;
-    }
-    h1 {
-        font-size: 42px;
-        font-weight: 500;
-        padding-top: 3px;
+        padding-top: 8px;
     }
 }
 #header-right {
