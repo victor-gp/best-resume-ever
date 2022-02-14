@@ -48,7 +48,7 @@
                 <div class="col edu-institution"><span>{{ education.institution || "Lorem Ipsum" }}</span></div>
                 <div class="col time-period"><span>{{ education.timeperiod }}</span></div>
             </div>
-            <p class="edu-description">{{ education.description }}</p>
+            <p class="edu-description" v-if="education.description">{{ education.description }}</p>
         </div>
     </section>
     <section id="skills-section" v-if="person.skills != []">
@@ -57,7 +57,7 @@
             <li class="skill" :id="'skill-' + skill.name.replace(/[ \.]/g, '_')"
                 v-for="skill in person.skills" :key="skill.name"><span>{{ skill.name }}</span></li>
         </ul>
-        <p id="skills-knowledge">{{ person.knowledge }}</p>
+        <p id="skills-knowledge" v-if="person.knowledge" >{{ person.knowledge }}</p>
     </section>
 </div></div>
 </template>
