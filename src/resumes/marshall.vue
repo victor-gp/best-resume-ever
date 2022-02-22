@@ -77,7 +77,7 @@ export default Vue.component(name, getVueOptions(name));
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 
-@flavor-color: #2a3ffb;
+@accent-color: #fa5728;
 @off-black: #4f5157;
 
 #page-container {
@@ -120,7 +120,7 @@ h1, h2, p {
 
         border-radius: 50%; // makes the photo rounded
         /* padding-bottom: 10px; */ // looks eggy but cool!
-        box-shadow: 0 0 2px @flavor-color; // adds a subtle border around the photo
+        box-shadow: 0 0 2px @accent-color; // adds a subtle border around the photo
         /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
     }
 }
@@ -138,7 +138,7 @@ h1, h2, p {
     }
     i {
         margin-right: 0.5em; // space after each icon
-        color: darken(@flavor-color, 15%);
+        color: darken(@accent-color, 5%);
     }
     .fa-github {
         color: black;
@@ -161,7 +161,7 @@ h1, h2, p {
 section > header {
     overflow: hidden;
     white-space: nowrap;
-    color: @flavor-color;
+    color: @accent-color;
     h2 {
         display: inline-block;
         font-size: 1.375em;
