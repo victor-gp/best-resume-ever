@@ -209,6 +209,7 @@ h1, h2, p {
         color: #0077b5; // linkedin blue
     }
 }
+
 #about {
     font-size: 1.05em;
     margin: 1.5em 1em 0;
@@ -219,6 +220,11 @@ h1, h2, p {
         margin: 0.7em 0 0;
     }
 }
+
+#header-container.no-photo > #about {
+    margin-top: 2em;
+}
+
 section > header {
     overflow: hidden;
     white-space: nowrap;
