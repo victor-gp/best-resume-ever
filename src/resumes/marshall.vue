@@ -154,6 +154,24 @@ h1, h2, p {
 }
 
 #header-container.no-photo {
+    display: flex;
+    flex-wrap: wrap;
+
+    .left {
+        flex-grow: 1;
+    }
+
+    #photo {
+        display: none;
+    }
+
+    #contact-info {
+        flex-grow: 1;
+        align-items: flex-end;
+
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 #contact-info {
