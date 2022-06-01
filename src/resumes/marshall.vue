@@ -102,49 +102,61 @@ export default Vue.component(name, opts);
 h1, h2, p {
     margin: 0;
 }
-#header-top {
-    display: flex;
 
-    .left {
-        #name {
-            font-size: 42px;
-            font-weight: 500;
-        }
-        #position {
-            font-size:23px;
-            font-weight: 500;
-            color: @off-black;
-            padding-top: 8px;
+#name {
+    font-size: 42px;
+    font-weight: 500;
+}
+#position {
+    font-size:23px;
+    font-weight: 500;
+    color: @off-black;
+    padding-top: 8px;
+}
+
+#header-container:not(.no-photo) {
+    #header-top {
+        display: flex;
+
+        .right {
+            position: relative;
+            // takes the leftover horizontal space so that #photo can be right aligned
+            flex-grow: 1;
+            // improve alignment with the bottom of #header-left, fine tune as required
+            margin-bottom: 4px;
+            #photo {
+                position: absolute;
+                max-height: 100%;
+                object-fit: scale-down;
+                right: 0;
+
+                // makes the photo rounded
+                border-radius: 50%;
+                // looks eggy but cool!
+                /* padding-bottom: 10px; */
+                // adds a subtle border around the photo
+                box-shadow: 0 0 2px @accent-color;
+                // fix blurry downscaled pictures on Chrome
+                /* image-rendering: pixelated; */
+            }
         }
     }
 
-    .right {
-        position: relative;
-        // takes the leftover horizontal space so that #headshot can be right aligned
-        flex-grow: 1;
-        // improve alignment with the bottom of #header-left, fine tune as required
-        margin-bottom: 4px;
-        #photo {
-            position: absolute;
-            max-height: 100%;
-            object-fit: scale-down;
-            right: 0;
-
-            border-radius: 50%; // makes the photo rounded
-            /* padding-bottom: 10px; */ // looks eggy but cool!
-            box-shadow: 0 0 2px @accent-color; // adds a subtle border around the photo
-            /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
+    #contact-info {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        span {
+            // use this if justify-content leaves too much space between elements
+            /* margin-right: 20px; */
         }
     }
 }
+
+#header-container.no-photo {
+}
+
 #contact-info {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    span {
-        // use this if justify-content leaves too much space between elements
-        /* margin-right: 20px; */
-    }
     a {
         text-decoration: none; // no underline for links
         color: inherit; // don't change color on :visited
