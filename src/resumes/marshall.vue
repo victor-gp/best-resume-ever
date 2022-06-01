@@ -2,28 +2,33 @@
 
 <template>
 <div class="resume" id="template"><div id="page-container">
-    <div id="header-container">
-        <div id="header-left">
-            <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
-            <h2 id="position">{{ person.position }}</h2>
+    <div id="header-container" :class=" noPhoto ? 'no-photo' : 'with-photo' ">
+        <div id="header-top">
+            <div class="left">
+                <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
+                <h2 id="position">{{ person.position }}</h2>
+            </div>
+            <div class="right">
+                <img id="photo" src="../../resume/id.jpg"
+                    :alt="`Photo of ${person.name.first + ' ' + person.name.last}`">
+            </div>
         </div>
-        <div id="header-right">
-            <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
+        <div id="contact-info">
+            <span id="location" v-if="person.contact.city">
+                <i class="fa fa-map-marker icon-left" aria-hidden="true"></i>{{ person.contact.city }}<i class="fa fa-map-marker icon-right" aria-hidden="true"></i>
+            </span>
+            <span id="email"><a :href='"mailto:" + person.contact.email'>
+                <i class="fa fa-envelope-o icon-left" aria-hidden="true"></i>{{ person.contact.email }}<i class="fa fa-envelope-o icon-right" aria-hidden="true"></i></a></span>
+            <span id="phone"><i class="fa fa-phone icon-left" aria-hidden="true"></i>{{person.contact.phone}}<i class="fa fa-phone icon-right" aria-hidden="true"></i></span>
+            <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-home icon-left" aria-hidden="true"></i>{{ person.contact.website }}<i class="fa fa-home icon-right" aria-hidden="true"></i></a></span>
+            <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-github icon-left" aria-hidden="true"></i>{{ person.contact.github }}<i class="fa fa-github icon-right" aria-hidden="true"></i></a></span>
+            <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-linkedin icon-left" aria-hidden="true"></i>{{ person.contact.linkedin }}<i class="fa fa-linkedin icon-right" aria-hidden="true"></i></a></span>
         </div>
+        <div id="about" v-if="person.about" v-html="person.about"></div>
     </div>
-    <div id="contact-info">
-        <span id="location" v-if="person.contact.city"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ person.contact.city }}</span>
-        <span id="email"><a :href='"mailto:" + person.contact.email'>
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>{{ person.contact.email }}</a></span>
-        <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
-        <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-home" aria-hidden="true"></i>{{ person.contact.website }}</a></span>
-        <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-github" aria-hidden="true"></i>{{ person.contact.github }}</a></span>
-        <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-linkedin color-linkedin" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
-    </div>
-    <div id="about" v-if="person.about" v-html="person.about"></div>
     <section id="experience-section">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="experience in person.experience" :key="experience.company">
@@ -67,7 +72,15 @@ import Vue from 'vue';
 import { getVueOptions } from './options';
 
 const name = 'marshall';
-export default Vue.component(name, getVueOptions(name));
+const opts = { ...getVueOptions(name) };
+opts.props = ['noPhoto'];
+
+/* useful for debugging */
+opts.created = function () {
+    console.log(this.noPhoto);
+};
+
+export default Vue.component(name, opts);
 </script>
 
 <style>
@@ -91,60 +104,108 @@ export default Vue.component(name, getVueOptions(name));
 h1, h2, p {
     margin: 0;
 }
-#header-container {
-    display: flex;
-}
-#header-left {
-    #name {
-        font-size: 42px;
-        font-weight: 500;
-    }
-    #position {
-        font-size:23px;
-        font-weight: 500;
-        color: @off-black;
-        padding-top: 8px;
-    }
-}
-#header-right {
-    position: relative;
-    // takes the leftover horizontal space so that #headshot can be right aligned
-    flex-grow: 1;
-    // improve alignment with the bottom of #header-left, fine tune as required
-    margin-bottom: 4px;
-    #headshot {
-        position: absolute;
-        max-height: 100%;
-        object-fit: scale-down;
-        right: 0;
 
-        border-radius: 50%; // makes the photo rounded
-        /* padding-bottom: 10px; */ // looks eggy but cool!
-        box-shadow: 0 0 2px @accent-color; // adds a subtle border around the photo
-        /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
+#name {
+    font-size: 42px;
+    font-weight: 500;
+}
+#position {
+    font-size:23px;
+    font-weight: 500;
+    color: @off-black;
+    padding-top: 8px;
+}
+
+#header-container.with-photo {
+    #header-top {
+        display: flex;
+
+        .right {
+            position: relative;
+            // takes the leftover horizontal space so that #photo can be right aligned
+            flex-grow: 1;
+            // improve alignment with the bottom of #header-left, fine tune as required
+            margin-bottom: 4px;
+            #photo {
+                position: absolute;
+                max-height: 100%;
+                object-fit: scale-down;
+                right: 0;
+
+                // makes the photo rounded
+                border-radius: 50%;
+                // looks eggy but cool!
+                /* padding-bottom: 10px; */
+                // adds a subtle border around the photo
+                box-shadow: 0 0 2px @accent-color;
+                // fix blurry downscaled pictures on Chrome
+                /* image-rendering: pixelated; */
+            }
+        }
+    }
+
+    #contact-info {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        i.icon-left {
+            // space after each icon
+            margin-right: 0.5em;
+        }
+
+        i.icon-right {
+            display: none;
+        }
+
+        span {
+            // use this if justify-content leaves too much space between elements
+            /* margin-right: 20px; */
+        }
     }
 }
-#contact-info {
-    margin-top: 10px;
+
+#header-container.no-photo {
     display: flex;
-    justify-content: space-between;
-    span {
-        // use this if justify-content leaves too much space between elements
-        /* margin-right: 20px; */
+    flex-wrap: wrap;
+
+    #photo {
+        display: none;
     }
+
+    #contact-info {
+        flex-grow: 1;
+        align-items: flex-end;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        i.icon-left {
+            display: none;
+        }
+
+        i.icon-right {
+            width: 1.5rem;
+            text-align: center;
+            margin-left: .2em;
+        }
+    }
+}
+
+#contact-info {
     a {
         text-decoration: none; // no underline for links
         color: inherit; // don't change color on :visited
     }
     i {
-        margin-right: 0.5em; // space after each icon
         color: darken(@accent-color, 5%);
     }
     .fa-github {
         color: black;
         font-size: 115%; // coz it's too small, can't make out the octocat!
     }
-    .color-linkedin {
+    .fa-linkedin {
         color: #0077b5; // linkedin blue
     }
 }
