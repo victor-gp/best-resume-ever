@@ -2,7 +2,7 @@
 
 <template>
 <div class="resume" id="template"><div id="page-container">
-    <div id="header-container">
+    <div id="header-container" :class="{ 'no-photo': noPhoto }">
         <div id="header-left">
             <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
             <h2 id="position">{{ person.position }}</h2>
@@ -67,7 +67,15 @@ import Vue from 'vue';
 import { getVueOptions } from './options';
 
 const name = 'marshall';
-export default Vue.component(name, getVueOptions(name));
+const opts = { ...getVueOptions(name) };
+opts.props = ['noPhoto'];
+
+/* useful for debugging */
+opts.created = function () {
+    console.log(this.noPhoto);
+};
+
+export default Vue.component(name, opts);
 </script>
 
 <style>

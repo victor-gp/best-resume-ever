@@ -1,5 +1,5 @@
 <template>
-    <marshall></marshall>
+    <marshall no-photo="yes" ></marshall>
 </template>
 
 <script>
