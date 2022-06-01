@@ -14,16 +14,18 @@
             </div>
         </div>
         <div id="contact-info">
-            <span id="location" v-if="person.contact.city"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ person.contact.city }}</span>
+            <span id="location" v-if="person.contact.city">
+                <i class="fa fa-map-marker icon-left" aria-hidden="true"></i>{{ person.contact.city }}<i class="fa fa-map-marker icon-right" aria-hidden="true"></i>
+            </span>
             <span id="email"><a :href='"mailto:" + person.contact.email'>
-                <i class="fa fa-envelope-o" aria-hidden="true"></i>{{ person.contact.email }}</a></span>
-            <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
+                <i class="fa fa-envelope-o icon-left" aria-hidden="true"></i>{{ person.contact.email }}<i class="fa fa-envelope-o icon-right" aria-hidden="true"></i></a></span>
+            <span id="phone"><i class="fa fa-phone icon-left" aria-hidden="true"></i>{{person.contact.phone}}<i class="fa fa-phone icon-right" aria-hidden="true"></i></span>
             <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-home" aria-hidden="true"></i>{{ person.contact.website }}</a></span>
+                <i class="fa fa-home icon-left" aria-hidden="true"></i>{{ person.contact.website }}<i class="fa fa-home icon-right" aria-hidden="true"></i></a></span>
             <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-github" aria-hidden="true"></i>{{ person.contact.github }}</a></span>
+                <i class="fa fa-github icon-left" aria-hidden="true"></i>{{ person.contact.github }}<i class="fa fa-github icon-right" aria-hidden="true"></i></a></span>
             <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-linkedin color-linkedin" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
+                <i class="fa fa-linkedin icon-left" aria-hidden="true"></i>{{ person.contact.linkedin }}<i class="fa fa-linkedin icon-right" aria-hidden="true"></i></a></span>
         </div>
         <div id="about" v-if="person.about" v-html="person.about"></div>
     </div>
@@ -146,6 +148,16 @@ h1, h2, p {
         margin-top: 10px;
         display: flex;
         justify-content: space-between;
+
+        i.icon-left {
+            // space after each icon
+            margin-right: 0.5em;
+        }
+
+        i.icon-right {
+            display: none;
+        }
+
         span {
             // use this if justify-content leaves too much space between elements
             /* margin-right: 20px; */
@@ -171,6 +183,17 @@ h1, h2, p {
 
         display: flex;
         flex-direction: column;
+        justify-content: center;
+
+        i.icon-left {
+            display: none;
+        }
+
+        i.icon-right {
+            width: 1.5rem;
+            text-align: center;
+            margin-left: .2em;
+        }
     }
 }
 
@@ -180,14 +203,13 @@ h1, h2, p {
         color: inherit; // don't change color on :visited
     }
     i {
-        margin-right: 0.5em; // space after each icon
         color: darken(@accent-color, 5%);
     }
     .fa-github {
         color: black;
         font-size: 115%; // coz it's too small, can't make out the octocat!
     }
-    .color-linkedin {
+    .fa-linkedin {
         color: #0077b5; // linkedin blue
     }
 }
