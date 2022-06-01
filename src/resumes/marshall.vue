@@ -4,12 +4,13 @@
 <div class="resume" id="template"><div id="page-container">
     <div id="header-container" :class="{ 'no-photo': noPhoto }">
         <div id="header-top">
-            <div id="header-left">
+            <div class="left">
                 <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
                 <h2 id="position">{{ person.position }}</h2>
             </div>
-            <div id="header-right">
-                <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
+            <div class="right">
+                <img id="photo" src="../../resume/id.jpg"
+                    :alt="`Photo of ${person.name.first + ' ' + person.name.last}`">
             </div>
         </div>
         <div id="contact-info">
@@ -103,35 +104,37 @@ h1, h2, p {
 }
 #header-top {
     display: flex;
-}
-#header-left {
-    #name {
-        font-size: 42px;
-        font-weight: 500;
-    }
-    #position {
-        font-size:23px;
-        font-weight: 500;
-        color: @off-black;
-        padding-top: 8px;
-    }
-}
-#header-right {
-    position: relative;
-    // takes the leftover horizontal space so that #headshot can be right aligned
-    flex-grow: 1;
-    // improve alignment with the bottom of #header-left, fine tune as required
-    margin-bottom: 4px;
-    #headshot {
-        position: absolute;
-        max-height: 100%;
-        object-fit: scale-down;
-        right: 0;
 
-        border-radius: 50%; // makes the photo rounded
-        /* padding-bottom: 10px; */ // looks eggy but cool!
-        box-shadow: 0 0 2px @accent-color; // adds a subtle border around the photo
-        /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
+    .left {
+        #name {
+            font-size: 42px;
+            font-weight: 500;
+        }
+        #position {
+            font-size:23px;
+            font-weight: 500;
+            color: @off-black;
+            padding-top: 8px;
+        }
+    }
+
+    .right {
+        position: relative;
+        // takes the leftover horizontal space so that #headshot can be right aligned
+        flex-grow: 1;
+        // improve alignment with the bottom of #header-left, fine tune as required
+        margin-bottom: 4px;
+        #photo {
+            position: absolute;
+            max-height: 100%;
+            object-fit: scale-down;
+            right: 0;
+
+            border-radius: 50%; // makes the photo rounded
+            /* padding-bottom: 10px; */ // looks eggy but cool!
+            box-shadow: 0 0 2px @accent-color; // adds a subtle border around the photo
+            /* image-rendering: pixelated; */ // fix blurry downscaled pictures on Chrome
+        }
     }
 }
 #contact-info {
