@@ -3,27 +3,29 @@
 <template>
 <div class="resume" id="template"><div id="page-container">
     <div id="header-container" :class="{ 'no-photo': noPhoto }">
-        <div id="header-left">
-            <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
-            <h2 id="position">{{ person.position }}</h2>
+        <div id="header-top">
+            <div id="header-left">
+                <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
+                <h2 id="position">{{ person.position }}</h2>
+            </div>
+            <div id="header-right">
+                <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
+            </div>
         </div>
-        <div id="header-right">
-            <img id="headshot" src="../../resume/id.jpg" alt="Headshot">
+        <div id="contact-info">
+            <span id="location" v-if="person.contact.city"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ person.contact.city }}</span>
+            <span id="email"><a :href='"mailto:" + person.contact.email'>
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>{{ person.contact.email }}</a></span>
+            <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
+            <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-home" aria-hidden="true"></i>{{ person.contact.website }}</a></span>
+            <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-github" aria-hidden="true"></i>{{ person.contact.github }}</a></span>
+            <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
+                <i class="fa fa-linkedin color-linkedin" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
         </div>
+        <div id="about" v-if="person.about" v-html="person.about"></div>
     </div>
-    <div id="contact-info">
-        <span id="location" v-if="person.contact.city"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ person.contact.city }}</span>
-        <span id="email"><a :href='"mailto:" + person.contact.email'>
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>{{ person.contact.email }}</a></span>
-        <span id="phone"><i class='fa fa-phone' aria-hidden="true"></i>{{person.contact.phone}}</span>
-        <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-home" aria-hidden="true"></i>{{ person.contact.website }}</a></span>
-        <span id="github" v-if="person.contact.github"><a :href='contactLinks.github' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-github" aria-hidden="true"></i>{{ person.contact.github }}</a></span>
-        <span id="linkedin" v-if="person.contact.linkedin"><a :href='contactLinks.linkedin' target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-linkedin color-linkedin" aria-hidden="true"></i>{{ person.contact.linkedin }}</a></span>
-    </div>
-    <div id="about" v-if="person.about" v-html="person.about"></div>
     <section id="experience-section">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="experience in person.experience" :key="experience.company">
@@ -99,7 +101,7 @@ export default Vue.component(name, opts);
 h1, h2, p {
     margin: 0;
 }
-#header-container {
+#header-top {
     display: flex;
 }
 #header-left {
