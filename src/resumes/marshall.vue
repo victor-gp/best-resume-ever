@@ -2,7 +2,7 @@
 
 <template>
 <div class="resume" id="template"><div id="page-container">
-    <div id="header-container" :class="{ 'no-photo': noPhoto }">
+    <div id="header-container" :class=" noPhoto ? 'no-photo' : 'with-photo' ">
         <div id="header-top">
             <div class="left">
                 <h1 id="name">{{ person.name.first + ' ' + person.name.last }}</h1>
@@ -116,7 +116,7 @@ h1, h2, p {
     padding-top: 8px;
 }
 
-#header-container:not(.no-photo) {
+#header-container.with-photo {
     #header-top {
         display: flex;
 
@@ -168,10 +168,6 @@ h1, h2, p {
 #header-container.no-photo {
     display: flex;
     flex-wrap: wrap;
-
-    .left {
-        flex-grow: 1;
-    }
 
     #photo {
         display: none;
