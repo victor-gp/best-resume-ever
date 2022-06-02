@@ -181,6 +181,10 @@ h1, h2, p {
         flex-direction: column;
         justify-content: center;
 
+        span + span {
+            margin-top: 0.2em;
+        }
+
         i.icon-left {
             display: none;
         }
