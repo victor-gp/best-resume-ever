@@ -21,7 +21,9 @@ experience:
 - company: Company A
   position: Developer
   timeperiod: since January 2016
-  description: Programming and watching cute cat videos.
+  highlights:
+  - Programming.
+  - Watching cute cat videos.
   website: https://example.com
 
 - company: Company B

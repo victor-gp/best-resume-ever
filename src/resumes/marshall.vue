@@ -28,17 +28,17 @@
         </div>
         <div id="about" v-if="person.about" v-html="person.about"></div>
     </div>
-    <section id="experience-section">
+    <section id="work-section">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
-        <div class="experience" v-for="experience in person.experience" :key="experience.company">
+        <div class="experience" v-for="job in person.experience" :key="job.company">
             <div class="row-3-period job-info">
-                <div class="col job-position"><h3>{{ experience.position }}</h3></div>
-                <div class="col job-company"><span>{{ experience.company }}</span></div>
-                <div class="col time-period"><span>{{ experience.timeperiod }}</span></div>
+                <div class="col job-position"><h3>{{ job.position }}</h3></div>
+                <div class="col job-company"><span>{{ job.company }}</span></div>
+                <div class="col time-period"><span>{{ job.timeperiod }}</span></div>
             </div>
-            <p class="job-description" v-if="experience.description">{{ experience.description }}</p>
-            <ul class="job-bullets" v-if="experience.list">
-                <li class="job-bullet" v-for="(item, index) in experience.list" :key="index">
+            <p class="job-description" v-if="job.description">{{ job.description }}</p>
+            <ul class="job-bullets" v-if="job.highlights">
+                <li class="job-bullet" v-for="(item, index) in job.highlights" :key="index">
                     <span>{{ item }}</span>
                 </li>
             </ul>
