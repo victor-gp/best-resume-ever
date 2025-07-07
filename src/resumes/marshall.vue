@@ -63,6 +63,13 @@
                 v-for="skill in person.skills" :key="skill.name"><span>{{ skill.name }}</span></li>
         </ul>
         <p id="skills-knowledge" v-if="person.knowledge" >{{ person.knowledge }}</p>
+        <ul id="languages-list">
+            <li class="skill" :id="'lang-' + lang.language.replace(/[ \.]/g, '_')"
+                v-for="lang in person.languages" :key="lang.language">
+                <span v-if="lang.fluency">{{ `${lang.language} &ndash; ${lang.fluency}` }}</span>
+                <span v-else>{{ `${lang.language}` }}</span>
+            </li>
+        </ul>
     </section>
 </div></div>
 </template>
@@ -320,12 +327,12 @@ header + .education {
         margin-top: 1em;
     }
 }
-#skill-list { // <ul>
+#skills-section > ul {
     display: flex;
     flex-flow: row wrap;
     padding-left: 0; // no indent
     list-style-type: none; // no bullets
-    margin: 1.5em 0 0;
+    margin-bottom: 0;
     // rows are left aligned and irregular, better avoid any 100% lines
     margin-right: 4%;
     li.skill {
@@ -336,7 +343,6 @@ header + .education {
     }
     li.skill::before {
         border-left: thin solid black;
-        margin: 1px 0 1px;
         -webkit-print-color-adjust: exact;
         -webkit-filter: opacity(1);
         position: absolute;
@@ -359,7 +365,15 @@ header + .education {
         padding-right: 0;
     }
 }
-#skills-knowledge {
+#skills-section > header + * {
     margin-top: 1.5em;
+}
+#skills-section > * + * {
+    margin-top: 2em;
+
+}
+#skills-section > ul + * {
+    // offset the li.skill margin-bottom
+    margin-top: calc(2em - 0.8em);
 }
 </style>

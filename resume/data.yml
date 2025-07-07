@@ -62,8 +62,13 @@ skills:
   level: 70
 - name: Docker
   level: 99
-knowledge: Also proficient in Adobe Photoshop and Illustrator, grew up bilingual
-  (English and Klingon).
+
+knowledge: Also proficient in Adobe Photoshop and Illustrator.
+
+languages:
+- language: English
+- language: Klingon
+  fluency: native
 
 projects:
 - name: best-resume-ever
