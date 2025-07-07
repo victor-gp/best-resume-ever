@@ -38,13 +38,15 @@ experience:
 
 education:
 - degree: Master of Arts
+  institution: University A, New York, USA
   timeperiod: March 2012 - December 2013
-  description: Major in Hacking and Computer Penetration, University A, New York, USA.
+  description: Major in Hacking and Computer Penetration.
   website: https://example.com
 
 - degree: Bachelor of Science
+  institution: University B, Los Angeles, USA
   timeperiod: March 2009 - December 2011
-  description: Major in Engineering, University B, Los Angeles, USA.
+  description: Major in Engineering.
 
 # skill level goes from 0 to 100
 skills:
@@ -101,6 +103,7 @@ contact:
   city: New York
   website: johndoe.com
   github: johnyD
+  linkedin: johndoe
 
 xvolunteer:
 - organization: Code Club
