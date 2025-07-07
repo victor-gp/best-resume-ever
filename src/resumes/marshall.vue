@@ -204,6 +204,7 @@ h1, h2, p {
         justify-content: center;
 
         span + span {
+            //nice: drop this for justify-content or align-items?
             margin-top: 0.2em;
         }
 

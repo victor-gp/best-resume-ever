@@ -1,6 +1,8 @@
 /* #*/ export const PERSON = `
 # Any fields left unchanged, please delete so your resume is fully yours!
 
+#TODO: change to fit the JSON Resume schema
+
 name:
   first: John
   middle:
