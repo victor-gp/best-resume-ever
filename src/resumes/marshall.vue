@@ -1,4 +1,4 @@
-// based on some of the templates in <https://standardresume.co/>
+<!-- based on some of the templates in <https://standardresume.co/> -->
 
 <template>
 <div class="resume" id="template"><div id="page-container">
@@ -72,7 +72,7 @@ import Vue from 'vue';
 import { getVueOptions } from './options';
 
 const name = 'marshall';
-const opts = { ...getVueOptions(name) };
+const opts = getVueOptions(name);
 opts.props = ['noPhoto'];
 
 /* useful for debugging */
