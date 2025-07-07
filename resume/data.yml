@@ -99,6 +99,13 @@ contact:
   city: New York
   website: johndoe.com
   github: johnyD
+
+xvolunteer:
+- organization: Code Club
+  position: Teaching instructor
+  timeperiod: November 2011 - March 2012
+  summary: Teaching Scratch to kids ages 10-12.
+
 # en, de, fr, pt, ca, cn, it, es, th, pt-br, ru, sv, id, hu, pl, ja, ka, nl, he, zh-tw, lt, ko, el, nb-no
 lang: en
 `

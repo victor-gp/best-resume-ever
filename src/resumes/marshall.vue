@@ -70,6 +70,22 @@
             </li>
         </ul>
     </section>
+    <section id="volunteer-section" v-if="person.volunteer">
+        <header><h2>{{ lang.volunteer }}</h2><hr/></header>
+        <div class="vol-experience" v-for="job in person.volunteer" :key="job.organization">
+            <div class="row-3-period vol-info">
+                <div class="col vol-position"><h3>{{ job.position }}</h3></div>
+                <div class="col vol-organization"><span>{{ job.organization }}</span></div>
+                <div class="col time-period"><span>{{ job.timeperiod }}</span></div>
+            </div>
+            <p class="vol-description" v-if="job.summary">{{ job.summary }}</p>
+            <ul class="job-bullets" v-if="job.highlights">
+                <li class="job-bullet" v-for="(item, index) in job.highlights" :key="index">
+                    <span>{{ item }}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
 </div></div>
 </template>
 
@@ -308,23 +324,25 @@ header + .experience {
         margin-top: 1ex;
     }
 }
+// todo: tier-1 vs 2 rather than content-based classes
 // first block
-header + .education {
+header + .education, header + .vol-experience {
     margin-top: calc(1.15 * 1.5em);
 }
-.education {
+.education, .vol-experience {
     // later blocks
     margin-top: calc(1.15 * 2em);
-    .edu-degree > h3 {
+    .edu-degree > h3, .vol-position > h3 {
         font-size: 1.15em;
         font-weight: 500;
     }
-    .edu-institution > span {
+    .edu-institution > span, .vol-organization > span {
         font-weight: 500;
     }
-    .edu-description {
+    .edu-description, .vol-description {
         margin-top: 1em;
     }
+    //nice: properly style highlights (see experience)
 }
 #skills-section > ul {
     display: flex;
