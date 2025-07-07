@@ -1,4 +1,4 @@
-// based on some of the templates in <https://standardresume.co/>
+<!-- based on some of the templates in <https://standardresume.co/> -->
 
 <template>
 <div class="resume" id="template"><div id="page-container">
@@ -17,8 +17,7 @@
             <span id="location" v-if="person.contact.city">
                 <i class="fa fa-map-marker icon-left" aria-hidden="true"></i>{{ person.contact.city }}<i class="fa fa-map-marker icon-right" aria-hidden="true"></i>
             </span>
-            <span id="email"><a :href='"mailto:" + person.contact.email'>
-                <i class="fa fa-envelope-o icon-left" aria-hidden="true"></i>{{ person.contact.email }}<i class="fa fa-envelope-o icon-right" aria-hidden="true"></i></a></span>
+            <span id="email"> <i class="fa fa-envelope-o icon-left" aria-hidden="true"></i>{{ person.contact.email }}<i class="fa fa-envelope-o icon-right" aria-hidden="true"></i></span>
             <span id="phone"><i class="fa fa-phone icon-left" aria-hidden="true"></i>{{person.contact.phone}}<i class="fa fa-phone icon-right" aria-hidden="true"></i></span>
             <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
                 <i class="fa fa-home icon-left" aria-hidden="true"></i>{{ person.contact.website }}<i class="fa fa-home icon-right" aria-hidden="true"></i></a></span>
@@ -29,23 +28,23 @@
         </div>
         <div id="about" v-if="person.about" v-html="person.about"></div>
     </div>
-    <section id="experience-section">
+    <section id="work-section" v-if="person.experience">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
-        <div class="experience" v-for="experience in person.experience" :key="experience.company">
+        <div class="experience" v-for="job in person.experience" :key="job.company">
             <div class="row-3-period job-info">
-                <div class="col job-position"><h3>{{ experience.position }}</h3></div>
-                <div class="col job-company"><span>{{ experience.company }}</span></div>
-                <div class="col time-period"><span>{{ experience.timeperiod }}</span></div>
+                <div class="col job-position"><h3>{{ job.position }}</h3></div>
+                <div class="col job-company"><span>{{ job.company }}</span></div>
+                <div class="col time-period"><span>{{ job.timeperiod }}</span></div>
             </div>
-            <p class="job-description" v-if="experience.description">{{ experience.description }}</p>
-            <ul class="job-bullets" v-if="experience.list">
-                <li class="job-bullet" v-for="(item, index) in experience.list" :key="index">
+            <p class="job-description" v-if="job.description">{{ job.description }}</p>
+            <ul class="job-bullets" v-if="job.highlights">
+                <li class="job-bullet" v-for="(item, index) in job.highlights" :key="index">
                     <span>{{ item }}</span>
                 </li>
             </ul>
         </div>
     </section>
-    <section id="education-section">
+    <section id="education-section" v-if="person.education">
         <header><h2>{{ lang.education }}</h2><hr/></header>
         <div class="education" v-for="education in person.education" :key="education.degree">
             <div class="row-3-period">
@@ -63,6 +62,29 @@
                 v-for="skill in person.skills" :key="skill.name"><span>{{ skill.name }}</span></li>
         </ul>
         <p id="skills-knowledge" v-if="person.knowledge" >{{ person.knowledge }}</p>
+        <ul id="languages-list" v-if="person.languages">
+            <li class="skill" :id="'lang-' + lang.language.replace(/[ \.]/g, '_')"
+                v-for="lang in person.languages" :key="lang.language">
+                <span v-if="lang.fluency">{{ `${lang.language} &ndash; ${lang.fluency}` }}</span>
+                <span v-else>{{ `${lang.language}` }}</span>
+            </li>
+        </ul>
+    </section>
+    <section id="volunteer-section" v-if="person.volunteer">
+        <header><h2>{{ lang.volunteer }}</h2><hr/></header>
+        <div class="vol-experience" v-for="job in person.volunteer" :key="job.organization">
+            <div class="row-3-period vol-info">
+                <div class="col vol-position"><h3>{{ job.position }}</h3></div>
+                <div class="col vol-organization"><span>{{ job.organization }}</span></div>
+                <div class="col time-period"><span>{{ job.timeperiod }}</span></div>
+            </div>
+            <p class="vol-description" v-if="job.summary">{{ job.summary }}</p>
+            <ul class="job-bullets" v-if="job.highlights">
+                <li class="job-bullet" v-for="(item, index) in job.highlights" :key="index">
+                    <span>{{ item }}</span>
+                </li>
+            </ul>
+        </div>
     </section>
 </div></div>
 </template>
@@ -72,7 +94,7 @@ import Vue from 'vue';
 import { getVueOptions } from './options';
 
 const name = 'marshall';
-const opts = { ...getVueOptions(name) };
+const opts = getVueOptions(name);
 opts.props = ['noPhoto'];
 
 /* useful for debugging */
@@ -182,6 +204,7 @@ h1, h2, p {
         justify-content: center;
 
         span + span {
+            //nice: drop this for justify-content or align-items?
             margin-top: 0.2em;
         }
 
@@ -302,30 +325,32 @@ header + .experience {
         margin-top: 1ex;
     }
 }
+// todo: tier-1 vs 2 rather than content-based classes
 // first block
-header + .education {
+header + .education, header + .vol-experience {
     margin-top: calc(1.15 * 1.5em);
 }
-.education {
+.education, .vol-experience {
     // later blocks
     margin-top: calc(1.15 * 2em);
-    .edu-degree > h3 {
+    .edu-degree > h3, .vol-position > h3 {
         font-size: 1.15em;
         font-weight: 500;
     }
-    .edu-institution > span {
+    .edu-institution > span, .vol-organization > span {
         font-weight: 500;
     }
-    .edu-description {
+    .edu-description, .vol-description {
         margin-top: 1em;
     }
+    //nice: properly style highlights (see experience)
 }
-#skill-list { // <ul>
+#skills-section > ul {
     display: flex;
     flex-flow: row wrap;
     padding-left: 0; // no indent
     list-style-type: none; // no bullets
-    margin: 1.5em 0 0;
+    margin-bottom: 0;
     // rows are left aligned and irregular, better avoid any 100% lines
     margin-right: 4%;
     li.skill {
@@ -336,7 +361,6 @@ header + .education {
     }
     li.skill::before {
         border-left: thin solid black;
-        margin: 1px 0 1px;
         -webkit-print-color-adjust: exact;
         -webkit-filter: opacity(1);
         position: absolute;
@@ -359,7 +383,15 @@ header + .education {
         padding-right: 0;
     }
 }
-#skills-knowledge {
+#skills-section > header + * {
     margin-top: 1.5em;
+}
+#skills-section > * + * {
+    margin-top: 2em;
+
+}
+#skills-section > ul + * {
+    // offset the li.skill margin-bottom
+    margin-top: calc(2em - 0.8em);
 }
 </style>

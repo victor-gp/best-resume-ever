@@ -1,6 +1,8 @@
 /* #*/ export const PERSON = `
 # Any fields left unchanged, please delete so your resume is fully yours!
 
+#TODO: change to fit the JSON Resume schema
+
 name:
   first: John
   middle:
@@ -21,7 +23,9 @@ experience:
 - company: Company A
   position: Developer
   timeperiod: since January 2016
-  description: Programming and watching cute cat videos.
+  highlights:
+  - Programming.
+  - Watching cute cat videos.
   website: https://example.com
 
 - company: Company B
@@ -36,13 +40,15 @@ experience:
 
 education:
 - degree: Master of Arts
+  institution: University A, New York, USA
   timeperiod: March 2012 - December 2013
-  description: Major in Hacking and Computer Penetration, University A, New York, USA.
+  description: Major in Hacking and Computer Penetration.
   website: https://example.com
 
 - degree: Bachelor of Science
+  institution: University B, Los Angeles, USA
   timeperiod: March 2009 - December 2011
-  description: Major in Engineering, University B, Los Angeles, USA.
+  description: Major in Engineering.
 
 # skill level goes from 0 to 100
 skills:
@@ -62,8 +68,13 @@ skills:
   level: 70
 - name: Docker
   level: 99
-knowledge: Also proficient in Adobe Photoshop and Illustrator, grew up bilingual
-  (English and Klingon).
+
+knowledge: Also proficient in Adobe Photoshop and Illustrator.
+
+languages:
+- language: English
+- language: Klingon
+  fluency: native
 
 projects:
 - name: best-resume-ever
@@ -94,6 +105,14 @@ contact:
   city: New York
   website: johndoe.com
   github: johnyD
+  linkedin: johndoe
+
+xvolunteer:
+- organization: Code Club
+  position: Teaching instructor
+  timeperiod: November 2011 - March 2012
+  summary: Teaching Scratch to kids ages 10-12.
+
 # en, de, fr, pt, ca, cn, it, es, th, pt-br, ru, sv, id, hu, pl, ja, ka, nl, he, zh-tw, lt, ko, el, nb-no
 lang: en
 `
