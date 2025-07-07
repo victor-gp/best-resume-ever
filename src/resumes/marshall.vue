@@ -17,7 +17,7 @@
             <span id="location" v-if="person.contact.city">
                 <i class="fa fa-map-marker icon-left" aria-hidden="true"></i>{{ person.contact.city }}<i class="fa fa-map-marker icon-right" aria-hidden="true"></i>
             </span>
-            <span id="email"> <i class="fa fa-envelope-o icon-left" aria-hidden="true"></i>{{ person.contact.email }}<i class="fa fa-envelope-o icon-right" aria-hidden="true"></i></span>
+            <span id="email"><i class="fa fa-envelope-o icon-left" aria-hidden="true"></i>{{ person.contact.email }}<i class="fa fa-envelope-o icon-right" aria-hidden="true"></i></span>
             <span id="phone"><i class="fa fa-phone icon-left" aria-hidden="true"></i>{{person.contact.phone}}<i class="fa fa-phone icon-right" aria-hidden="true"></i></span>
             <span id="website" v-if="person.contact.website"><a :href='person.contact.website' target="_blank" rel="noopener noreferrer">
                 <i class="fa fa-home icon-left" aria-hidden="true"></i>{{ person.contact.website }}<i class="fa fa-home icon-right" aria-hidden="true"></i></a></span>
