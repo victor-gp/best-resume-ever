@@ -28,7 +28,7 @@
         </div>
         <div id="about" v-if="person.about" v-html="person.about"></div>
     </div>
-    <section id="work-section">
+    <section id="work-section" v-if="person.experience">
         <header><h2>{{ lang.experience }}</h2><hr/></header>
         <div class="experience" v-for="job in person.experience" :key="job.company">
             <div class="row-3-period job-info">
@@ -44,7 +44,7 @@
             </ul>
         </div>
     </section>
-    <section id="education-section">
+    <section id="education-section" v-if="person.education">
         <header><h2>{{ lang.education }}</h2><hr/></header>
         <div class="education" v-for="education in person.education" :key="education.degree">
             <div class="row-3-period">
@@ -62,7 +62,7 @@
                 v-for="skill in person.skills" :key="skill.name"><span>{{ skill.name }}</span></li>
         </ul>
         <p id="skills-knowledge" v-if="person.knowledge" >{{ person.knowledge }}</p>
-        <ul id="languages-list">
+        <ul id="languages-list" v-if="person.languages">
             <li class="skill" :id="'lang-' + lang.language.replace(/[ \.]/g, '_')"
                 v-for="lang in person.languages" :key="lang.language">
                 <span v-if="lang.fluency">{{ `${lang.language} &ndash; ${lang.fluency}` }}</span>
